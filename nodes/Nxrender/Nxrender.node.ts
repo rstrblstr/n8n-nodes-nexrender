@@ -5,6 +5,7 @@ import {
 	INodeTypeDescription,
 	NodeApiError,
 	NodeOperationError,
+	IDataObject,
 } from 'n8n-workflow';
 import { createClient } from '@nexrender/api';
 
@@ -61,7 +62,7 @@ export class NxrenderNode implements INodeType {
 							default: 'create',
 					},
 					{
-							displayName: 'Job ID',
+							displayName: 'Job UID',
 							name: 'jobId',
 							type: 'string',
 							default: '',
@@ -70,6 +71,7 @@ export class NxrenderNode implements INodeType {
 											operation: ['update', 'get', 'delete'],
 									},
 							},
+							required: true,
 							description: 'The ID of the job to operate on',
 					},
 			],
@@ -79,10 +81,10 @@ export class NxrenderNode implements INodeType {
 			const items = this.getInputData();
 			const returnData: INodeExecutionData[] = [];
 
-			const credentials = await this.getCredentials('nxrenderApi');
+			const credentials = await this.getCredentials('nxrenderApi') as IDataObject;
 			const client = createClient({
-					host: credentials.host,
-					secret: credentials.secret,
+					host: credentials.host as string,
+					secret: credentials.secret as string,
 					polling: 3000, // fetch updates every 3000ms
 			});
 
@@ -92,18 +94,20 @@ export class NxrenderNode implements INodeType {
 
 					try {
 							if (operation === 'create') {
-									responseData = await client.addJob({
+									const result = await client.addJob({
 											template: {
 													src: 'http://my.server.com/assets/project.aep',
 													composition: 'main',
 											},
 									});
 
-									responseData.on('created', job => console.log('project has been created'));
-									responseData.on('started', job => console.log('project rendering started'));
-									responseData.on('progress', (job, percents) => console.log('project is at: ' + percents + '%'));
-									responseData.on('finished', job => console.log('project rendering finished'));
-									responseData.on('error', err => console.log('project rendering error', err));
+									result.on('created', (job: IDataObject) => console.log('project has been created'));
+									result.on('started', (job: IDataObject) => console.log('project rendering started'));
+									result.on('progress', (job: IDataObject, percents: number) => console.log('project is at: ' + percents + '%'));
+									result.on('finished', (job: IDataObject) => console.log('project rendering finished'));
+									result.on('error', (err: Error) => console.log('project rendering error', err));
+
+									responseData = { success: true };
 							} else if (operation === 'update') {
 									const jobId = this.getNodeParameter('jobId', itemIndex) as string;
 									// Implement the update logic here
