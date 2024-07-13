@@ -32,6 +32,7 @@ export class NxrenderNode implements INodeType {
 				displayName: 'Operation',
 				name: 'operation',
 				type: 'options',
+				noDataExpression: true,
 				options: [
 					{
 						name: 'Create',
@@ -59,7 +60,6 @@ export class NxrenderNode implements INodeType {
 					},
 				],
 				default: 'create',
-				description: 'The operation to perform.',
 			},
 			{
 				displayName: 'Job ID',
@@ -71,7 +71,7 @@ export class NxrenderNode implements INodeType {
 						operation: ['update', 'get', 'delete'],
 					},
 				},
-				description: 'The ID of the job to operate on.',
+				description: 'The ID of the job to operate on',
 			},
 		],
 	};
