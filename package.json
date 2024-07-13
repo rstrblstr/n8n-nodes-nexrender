@@ -54,6 +54,7 @@
     "n8n-workflow": "*"
   },
   "dependencies": {
+    "@nexrender-api": "^1.50.1",
     "@nexrender/api": "^1.50.1"
   }
 }

@@ -20,6 +20,11 @@
 		"sourceMap": true,
 		"skipLibCheck": true,
 		"outDir": "./dist/",
+		"paths": {
+				"*": [
+						"node_modules/*",
+						"@types/*"
+				]
 	},
 	"include": [
 		"credentials/**/*",
@@ -27,4 +32,5 @@
 		"nodes/**/*.json",
 		"package.json",
 	],
+}
 }
