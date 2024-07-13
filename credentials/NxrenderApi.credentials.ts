@@ -20,13 +20,13 @@ export class NxrenderApi implements ICredentialType {
 			name: 'apiKey',
 			type: 'string',
 			typeOptions: { password: true },
-			default: '',
+			default: 'myapisecret',
 		},
 	];
 	authenticate: IAuthenticateGeneric = {
 		type: 'generic',
 		properties: {
-			header: {
+			headers: {
 				'nexrender-secret': '={{$credentials.apiKey}}',
 			},
 		},
