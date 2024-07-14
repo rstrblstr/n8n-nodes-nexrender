@@ -52,13 +52,14 @@ export class NexrenderApi implements ICredentialType {
 							name: 'providerProtocol',
 							type: 'options',
 							options: [
-								{ name: 'GCS', value: 'credGCS' },
-								{ name: 'Other', value: 'credOther' },
 								{ name: 'AWS S3', value: 'credS3' },
 								{ name: 'FTP', value: 'credSFTP' },
+								{ name: 'GCS', value: 'credGCS' },
+								{ name: 'None', value: 'credNone' },
+								{ name: 'Other', value: 'credOther' },
 							],
-							default: 'SFTP',
-							description: 'Choose a service provider',
+							default: 'credNone',
+							description: 'Choose an upload service provider',
 						},
 						// Fields for S3
 						{

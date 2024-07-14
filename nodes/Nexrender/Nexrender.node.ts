@@ -36,7 +36,7 @@ export class Nexrender implements INodeType {
 		 *
 		 * https://docs.n8n.io/integrations/creating-nodes/code/create-first-node/#resources-and-operations
 		 *
-		 * In our example, the operations are separated into their own file (NexrenderDescription.ts)
+		 * In our example, the operations are separated into their own file (nexrenderDescription.ts)
 		 * to keep this class easy to read.
 		 *
 		 */

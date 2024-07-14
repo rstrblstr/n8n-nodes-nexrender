@@ -1,17 +1,17 @@
 {
-	"node": "n8n-nodes-base.nexrender",
+	"node": "n8n-nodes-nexrender",
 	"nodeVersion": "1.0",
 	"codexVersion": "1.0",
 	"categories": ["Development", "Developer Tools"],
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "http://nexrender.org/#/Auth/get_bearer"
+				"url": "https://github.com/inlife/nexrender"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "http://nexrender.org/"
+				"url": "https://autogfx.x.ccroww.com/"
 			}
 		]
 	}
