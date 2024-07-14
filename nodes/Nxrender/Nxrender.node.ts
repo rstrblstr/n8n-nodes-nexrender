@@ -7,7 +7,7 @@ import {
 	NodeOperationError,
 	IDataObject,
 } from 'n8n-workflow';
-import { createClient, Job } from '../../nexrender-api/src';
+import { createClient, Job } from '../../dist/nexrender-api/src';
 
 export class NxrenderNode implements INodeType {
 	description: INodeTypeDescription = {
