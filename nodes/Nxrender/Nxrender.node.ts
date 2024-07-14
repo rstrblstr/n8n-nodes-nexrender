@@ -7,7 +7,7 @@ import {
 	NodeOperationError,
 	IDataObject,
 } from 'n8n-workflow';
-import { createClient } from '@nexrender/api';
+import { createClient, Job } from '../../nexrender-api/src';
 
 export class NxrenderNode implements INodeType {
 	description: INodeTypeDescription = {
@@ -111,9 +111,11 @@ export class NxrenderNode implements INodeType {
 					// Implement the update logic here
 				} else if (operation === 'get') {
 					const jobId = this.getNodeParameter('jobId', itemIndex) as string;
-					responseData = await client.getJob(jobId);
+					const job: Job = await client.getJob(jobId);
+					responseData = { ...job } as IDataObject;
 				} else if (operation === 'list') {
-					responseData = await client.listJobs();
+					const jobs: Job[] = await client.listJobs();
+					responseData = { jobs } as unknown as IDataObject;
 				} else if (operation === 'delete') {
 					const jobId = this.getNodeParameter('jobId', itemIndex) as string;
 					await client.removeJob(jobId);

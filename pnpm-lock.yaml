@@ -8,9 +8,12 @@ importers:
 
   .:
     dependencies:
-      '@nexrender/api':
-        specifier: ^1.50.1
-        version: 1.50.1
+      '@nexrender/types':
+        specifier: ^1.45.6
+        version: 1.45.6
+      node-fetch:
+        specifier: ^2.6.12
+        version: 2.7.0
     devDependencies:
       '@typescript-eslint/parser':
         specifier: ^7.15.0
@@ -76,9 +79,6 @@ packages:
 
   '@n8n_io/riot-tmpl@4.0.1':
     resolution: {integrity: sha512-/zdRbEfTFjsm1NqnpPQHgZTkTdbp5v3VUxGeMA9098sps8jRCTraQkc3AQstJgHUm7ylBXJcIVhnVeLUMWAfwQ==}
-
-  '@nexrender/api@1.50.1':
-    resolution: {integrity: sha512-g25PrOxHOgZfbyCOnZMfNRmS8ALP+A7dIZVMUCHWuOEk9xc80xVzXilcBRkNDvR/XkYmhRoo6N2/8rWiTk+gOQ==}
 
   '@nexrender/types@1.45.6':
     resolution: {integrity: sha512-961UgMG9XdP+88bT4Sl4b0v0eF9aXfgK7Sidf7VodFwPFDFrglwqDjzc4CggabEIcG6xZjOUUrp0phcy5cBXWA==}
@@ -2084,13 +2084,6 @@ snapshots:
   '@n8n_io/riot-tmpl@4.0.1':
     dependencies:
       eslint-config-riot: 1.0.0
-
-  '@nexrender/api@1.50.1':
-    dependencies:
-      '@nexrender/types': 1.45.6
-      node-fetch: 2.7.0
-    transitivePeerDependencies:
-      - encoding
 
   '@nexrender/types@1.45.6':
     dependencies:
