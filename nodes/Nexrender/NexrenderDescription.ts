@@ -1,7 +1,7 @@
 import { INodeProperties } from 'n8n-workflow';
 
-// When the resource `nexrenderDescription` is selected, this `operation` parameter will be shown.
-export const nexrenderDescriptionOperations: INodeProperties[] = [
+// When the resource `NexrenderDescription` is selected, this `operation` parameter will be shown.
+export const NexrenderDescriptionOperations: INodeProperties[] = [
 	{
 		displayName: 'Operation',
 		name: 'operation',
@@ -10,7 +10,7 @@ export const nexrenderDescriptionOperations: INodeProperties[] = [
 
 		displayOptions: {
 			show: {
-				resource: ['nexrenderDescription'],
+				resource: ['NexrenderDescription'],
 			},
 		},
 		options: [
@@ -53,7 +53,7 @@ const getOperation: INodeProperties[] = [
 		description: 'Select type of data to send [Query Parameters]',
 		displayOptions: {
 			show: {
-				resource: ['nexrenderDescription'],
+				resource: ['NexrenderDescription'],
 				operation: ['get'],
 			},
 		},
@@ -73,7 +73,7 @@ const getOperation: INodeProperties[] = [
 		description: "The request's query parameters",
 		displayOptions: {
 			show: {
-				resource: ['nexrenderDescription'],
+				resource: ['NexrenderDescription'],
 				operation: ['get'],
 			},
 		},
@@ -124,7 +124,7 @@ const deleteOperation: INodeProperties[] = [
 		description: 'Select type of data to send [Query Parameter Arguments, JSON-Body]',
 		displayOptions: {
 			show: {
-				resource: ['nexrenderDescription'],
+				resource: ['NexrenderDescription'],
 				operation: ['delete'],
 			},
 		},
@@ -148,7 +148,7 @@ const deleteOperation: INodeProperties[] = [
 		description: "The request's query parameters",
 		displayOptions: {
 			show: {
-				resource: ['nexrenderDescription'],
+				resource: ['NexrenderDescription'],
 				operation: ['delete'],
 				typeofData: ['queryParameter'],
 			},
@@ -195,7 +195,7 @@ const deleteOperation: INodeProperties[] = [
 		description: "The request's JSON properties",
 		displayOptions: {
 			show: {
-				resource: ['nexrenderDescription'],
+				resource: ['NexrenderDescription'],
 				operation: ['delete'],
 				typeofData: ['jsonData'],
 			},
@@ -237,14 +237,14 @@ const deleteOperation: INodeProperties[] = [
 	},
 ];
 
-export const nexrenderDescriptionFields: INodeProperties[] = [
+export const NexrenderDescriptionFields: INodeProperties[] = [
 	/* -------------------------------------------------------------------------- */
-	/*                                nexrenderDescription:get                                */
+	/*                                NexrenderDescription:get                                */
 	/* -------------------------------------------------------------------------- */
 	...getOperation,
 
 	/* -------------------------------------------------------------------------- */
-	/*                              nexrenderDescription:delete                               */
+	/*                              NexrenderDescription:delete                               */
 	/* -------------------------------------------------------------------------- */
 	...deleteOperation,
 ];

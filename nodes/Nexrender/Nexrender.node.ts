@@ -1,5 +1,5 @@
 import { INodeType, INodeTypeDescription } from 'n8n-workflow';
-import { nexrenderDescriptionFields, nexrenderDescriptionOperations } from './NexrenderDescription';
+import { NexrenderDescriptionFields, NexrenderDescriptionOperations } from './NexrenderDescription';
 
 export class Nexrender implements INodeType {
 	description: INodeTypeDescription = {
@@ -26,7 +26,7 @@ export class Nexrender implements INodeType {
 			url: '/api/v1/',
 			headers: {
 				Accept: 'application/json',
-				'Content-Type': 'application/json',
+				 Content-Type: 'application/json',
 			},
 		},
 		/**
@@ -49,14 +49,14 @@ export class Nexrender implements INodeType {
 				options: [
 					{
 						name: 'Nexrender Task',
-						value: 'nexrenderDescription',
+						value: 'NexrenderDescription',
 					},
 				],
-				default: 'nexrenderDescription',
+				default: 'NexrenderDescription',
 			},
 
-			...nexrenderDescriptionOperations,
-			...nexrenderDescriptionFields,
+			...NexrenderDescriptionOperations,
+			...NexrenderDescriptionFields,
 		],
 	};
 }

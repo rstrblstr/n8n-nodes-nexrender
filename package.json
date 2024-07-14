@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-nexrender",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "automated After Effects production workflow",
   "keywords": [
     "n8n-community-node-package",
