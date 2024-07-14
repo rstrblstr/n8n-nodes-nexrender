@@ -1,0 +1,15 @@
+{
+	"node": "n8n-nodes-nexrender",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"automation"
+	],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "http://github.com/rstrblstr/n8n-nodes-nexrender"
+			}
+		]
+	}
+}

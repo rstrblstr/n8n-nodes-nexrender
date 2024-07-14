@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-nexrender",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "nexrender automation",
   "keywords": [
     "n8n-community-node-package"
@@ -43,6 +43,7 @@
     ]
   },
   "devDependencies": {
+    "@types/node": "^20.14.10",
     "@typescript-eslint/parser": "^7.15.0",
     "eslint": "^8.56.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.1",

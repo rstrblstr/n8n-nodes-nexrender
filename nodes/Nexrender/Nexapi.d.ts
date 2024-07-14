@@ -4,7 +4,7 @@ export interface CreateClientOptions {
     host: string;
     secret?: string;
     headers?: Record<string, string | (() => Promise<string>)>;
-    getNode: () => INode; // Add getNode to the interface
+    getNode: () => INode; // Ensure getNode is part of the interface
 }
 
 export interface Job {
