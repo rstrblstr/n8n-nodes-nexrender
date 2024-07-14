@@ -24,21 +24,17 @@
     "paths": {
       "*": [
         "./node_modules/*",
-        "./@types/*",
-        "./nexrender-api/*"
+        "./@types/*"
       ]
     }
   },
   "include": [
     "credentials/**/*",
     "nodes/**/*",
+    "nodes/**/**/*",
     "nodes/**/*.json",
+    "nodes/**/**/*.json",
     "package.json",
-    "./@types/*",
-    "nexrender-api/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
+    "./@types/*"
   ]
 }
