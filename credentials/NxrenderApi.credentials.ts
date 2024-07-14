@@ -4,8 +4,8 @@ import {
 	INodeProperties
 } from 'n8n-workflow';
 
-export class NxrenderApi implements ICredentialType {
-	name = 'nxrenderApi';
+export class NexrenderApi implements ICredentialType {
+	name = 'nexrenderApi';
 	displayName = 'Nexrender API';
 	properties: INodeProperties[] = [
 		{
