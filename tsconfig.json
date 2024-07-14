@@ -33,6 +33,7 @@
     "nodes/**/*",
     "nodes/**/*.json",
     "package.json",
-    "./@types/*"
+    "./@types/*",
+    "nexrender-api/**/*"
   ]
 }
