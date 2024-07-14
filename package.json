@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-nexrender",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "nexrender automation",
   "keywords": [
     "n8n-community-node-package"
@@ -39,7 +39,7 @@
     ],
     "nodes": [
       "dist/nodes/Nexrender/Nexrender.node.js",
-      "dist/nodes/Nexrender/Nexapi/index.js"
+      "dist/nodes/Nexrender/Nexapi.node.js"
     ]
   },
   "devDependencies": {
