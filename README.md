@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ![Banner image](https://user-images.githubusercontent.com/10284570/173569848-c624317f-42b1-45a6-ab09-f0ea3c247648.png)
 
 # n8n-nodes-starter
@@ -45,3 +46,7 @@ Refer to our [documentation on creating nodes](https://docs.n8n.io/integrations/
 ## License
 
 [MIT](https://github.com/n8n-io/n8n-nodes-starter/blob/master/LICENSE.md)
+=======
+# n8n-nodes-nexrender
+n8n rendering automation.  not currently working.
+>>>>>>> origin/main
