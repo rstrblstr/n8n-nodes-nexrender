@@ -34,43 +34,13 @@ export class NxrenderNode implements INodeType {
 				type: 'options',
 				noDataExpression: true,
 				options: [
-					{
-						name: 'Create',
-						value: 'create',
-						description: 'Create a job',
-						action: 'Create a job',
-					},
-					{
-						name: 'Delete',
-						value: 'delete',
-						description: 'Delete a job',
-						action: 'Delete a job',
-					},
-					{
-						name: 'Get',
-						value: 'get',
-						description: 'Get a job',
-						action: 'Get a job',
-					},
-					{
-						name: 'Health Check',
-						value: 'healthCheck',
-						description: 'Check server health',
-						action: 'Check server health',
-					},
-					{
-						name: 'List',
-						value: 'list',
-						description: 'List all jobs',
-						action: 'List all jobs',
-					},
-					{
-						name: 'Update',
-						value: 'update',
-						description: 'Update a job',
-						action: 'Update a job',
-					},
-				],
+					{ name: 'Create', value: 'create', description: 'Create a job', action: 'Create a job' },
+					{ name: 'Delete', value: 'delete', description: 'Delete a job', action: 'Delete a job' },
+					{ name: 'Get', value: 'get', description: 'Get a job', action: 'Get a job' },
+					{ name: 'Health Check', value: 'healthCheck', description: 'Check server health', action: 'Check server health' },
+					{ name: 'List', value: 'list', description: 'List all jobs', action: 'List all jobs' },
+					{ name: 'Update', value: 'update', description: 'Update a job', action: 'Update a job' },
+				], //All options lists in n8n nodes must be alphabetized.
 				default: 'create',
 			},
 			{
