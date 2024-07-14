@@ -1,28 +1,29 @@
 {
-  "name": "n8n-nodes-nexrender",
-  "version": "0.0.15",
-  "description": "nexrender automation",
+  "name": "n8n-nodes-<...>",
+  "version": "0.1.0",
+  "description": "",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
-  "homepage": "http://ccroww.com",
+  "homepage": "",
   "author": {
-    "name": "ccroww",
-    "email": "contactme@my.website.com"
+    "name": "",
+    "email": ""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rstrblstr/n8n-nodes-nexrender.git"
+    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org",
-    "access": "public"
+  "engines": {
+    "node": ">=18.10",
+    "pnpm": ">=9.1"
   },
+  "packageManager": "pnpm@9.1.4",
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "build": "tsc && gulp build",
+    "build": "tsc && gulp build:icons",
     "dev": "tsc --watch",
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
@@ -35,15 +36,15 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/NexrenderApi.credentials.js"
+      "dist/credentials/ExampleCredentialsApi.credentials.js",
+      "dist/credentials/HttpBinApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/Nexrender/Nexrender.node.js",
-      "dist/nodes/Nexrender/Nexapi.node.js"
+      "dist/nodes/ExampleNode/ExampleNode.node.js",
+      "dist/nodes/HttpBin/HttpBin.node.js"
     ]
   },
   "devDependencies": {
-    "@types/node": "^20.14.10",
     "@typescript-eslint/parser": "^7.15.0",
     "eslint": "^8.56.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.1",
@@ -53,10 +54,6 @@
     "typescript": "^5.5.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "*",
-    "@nexrender/types": "^1.45.6",
-    "node-fetch": "^2.6.12"
-  },
-  "dependencies": {
+    "n8n-workflow": "*"
   }
 }
