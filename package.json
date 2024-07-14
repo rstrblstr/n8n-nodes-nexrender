@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-nexrender",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "nexrender automation",
   "keywords": [
     "n8n-community-node-package"
@@ -53,10 +53,10 @@
     "typescript": "^5.5.3"
   },
   "peerDependencies": {
-    "n8n-workflow": "*"
-  },
-  "dependencies": {
+    "n8n-workflow": "*",
     "@nexrender/types": "^1.45.6",
     "node-fetch": "^2.6.12"
+  },
+  "dependencies": {
   }
 }
