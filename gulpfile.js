@@ -6,6 +6,11 @@ task('build:nexrender-api', copyNexrenderApi);
 task('build', series(copyIcons, copyNexrenderApi));
 
 function copyIcons() {
+	const apiSource = path.resolve('nexrender-api', '**', '*');
+	const apiDestination = path.resolve('dist', 'nexrender-api');
+
+	src(apiSource).pipe(dest(apiDestination));
+
 	const nodeSource = path.resolve('nodes', '**', '*.{png,svg}');
 	const nodeDestination = path.resolve('dist', 'nodes');
 

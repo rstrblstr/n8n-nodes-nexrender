@@ -24,7 +24,8 @@
     "paths": {
       "*": [
         "./node_modules/*",
-        "./@types/*"
+        "./@types/*",
+        "./nexrender-api/*"
       ]
     }
   },
@@ -35,5 +36,9 @@
     "package.json",
     "./@types/*",
     "nexrender-api/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
   ]
 }

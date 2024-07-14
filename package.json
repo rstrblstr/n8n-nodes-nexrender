@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-nexrender",
-  "version": "0.0.6",
+  "version": "0.0.9",
   "description": "nexrender automation",
   "keywords": [
     "n8n-community-node-package"
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rstrblstr/n8n-nodes-nexrender.git"
+    "url": "git+https://github.com/rstrblstr/n8n-nodes-nxrender.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",
@@ -22,7 +22,7 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "build": "tsc && gulp build:icons",
+    "build": "tsc && gulp build",
     "dev": "tsc --watch",
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
