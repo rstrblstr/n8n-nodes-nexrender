@@ -65,21 +65,6 @@ export const mainTab: INodeProperties[] = [
 		description: 'Whether to continue on missing assets',
 	},
 	{
-		displayName: 'Output Options',
-		name: 'outputOptions',
-		type: 'notice',
-		default: '',
-		description: '',
-		displayOptions: {
-			show: { operation: ['create', 'update'] },
-		},
-		notice: `
-			<p><strong>Output Options:</strong></p>
-			<p>Configure your output options here. For more information, visit the <a href="https://example.com/docs" target="_blank">documentation</a>.</p>
-			<img src="https://example.com/image.png" alt="Example Image" style="width: 100%; max-width: 400px;" />
-		`,
-	},
-	{
 		displayName: 'Workfolder Render Output Path',
 		name: 'outputLocation',
 		type: 'string',
@@ -115,7 +100,7 @@ export const mainTab: INodeProperties[] = [
 	},
 	{
 		displayName: 'Copy Final Render To (Folder)',
-		name: 'copyLocation',
+		name: 'copyLocationFolder',
 		type: 'string',
 		displayOptions: {
 			show: {
@@ -130,7 +115,7 @@ export const mainTab: INodeProperties[] = [
 	},
 	{
 		displayName: 'Copy Final Render To (File)',
-		name: 'copyLocation',
+		name: 'copyLocationFile',
 		type: 'string',
 		displayOptions: {
 			show: {

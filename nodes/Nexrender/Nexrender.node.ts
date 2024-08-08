@@ -50,15 +50,14 @@ export class Nexrender implements INodeType {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
 
+		const credentials = await this.getCredentials('nexrenderApi') as IDataObject;
+
+		if (!credentials) {
+			throw new Error('No credentials returned!');
+		}
+
 		for (let i = 0; i < items.length; i++) {
 			const operation = this.getNodeParameter('operation', i) as string;
-			const credentials = this.getCredentials('nexrenderApi') as IDataObject;
-
-			if (!credentials) {
-				throw new Error('No credentials returned!');
-			}
-
-			console.log('Fetched Credentials:', credentials);  // Log credentials for debugging
 
 			const requestOptions: IDataObject = {
 				headers: {
