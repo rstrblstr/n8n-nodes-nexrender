@@ -31,7 +31,7 @@ export class NexrenderApi implements ICredentialType {
 			name: 'token',
 			type: 'string',
 			default: 'myapisecret',
-			description: 'Your secret API key',
+			description: 'Your secret API key (Default: myapisecret)',
 			typeOptions: {
 				password: true,
 			},
@@ -42,8 +42,9 @@ export class NexrenderApi implements ICredentialType {
 			type: 'options',
 			options: [
 				{ name: 'None', value: 'credNone' },
-				{ name: 'AWS S3', value: 'credS3' },
-				{ name: 'FTP', value: 'credSFTP' },
+				{ name: 'S3', value: 'credS3' },
+				{ name: 'FTP', value: 'credFTP' },
+				{ name: 'SFTP', value: 'credSFTP' },
 				{ name: 'GCS', value: 'credGCS' },
 				{ name: 'Other', value: 'credOther' },
 			],
@@ -136,7 +137,7 @@ export class NexrenderApi implements ICredentialType {
 			displayName: 'SFTP Port',
 			name: 'sftpPort',
 			type: 'number',
-			default: 21,
+			default: 22,
 			displayOptions: {
 				show: {
 					provider: ['credSFTP'],
@@ -174,6 +175,52 @@ export class NexrenderApi implements ICredentialType {
 			displayOptions: {
 				show: {
 					provider: ['credSFTP'],
+				},
+			},
+		},
+		// Fields for FTP
+		{
+			displayName: 'FTP Host',
+			name: 'ftpHost',
+			type: 'string',
+			default: 'localhost',
+			displayOptions: {
+				show: {
+					provider: ['credFTP'],
+				},
+			},
+		},
+		{
+			displayName: 'FTP Port',
+			name: 'ftpPort',
+			type: 'number',
+			default: 21,
+			displayOptions: {
+				show: {
+					provider: ['credFTP'],
+				},
+			},
+		},
+		{
+			displayName: 'FTP User',
+			name: 'ftpUser',
+			type: 'string',
+			default: 'anonymous',
+			displayOptions: {
+				show: {
+					provider: ['credFTP'],
+				},
+			},
+		},
+		{
+			displayName: 'FTP Password',
+			name: 'ftpPassword',
+			type: 'string',
+			typeOptions: { password: true },
+			default: 'anonymous@',
+			displayOptions: {
+				show: {
+					provider: ['credFTP'],
 				},
 			},
 		},

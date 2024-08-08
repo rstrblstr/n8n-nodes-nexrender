@@ -5,17 +5,17 @@ import {
 	INodeTypeDescription,
 	IDataObject,
 } from 'n8n-workflow';
-import { NexrenderOperations, NexrenderFields } from './NexrenderDescription';
+import { NexrenderOperations, NexrenderFields } from './NexrenderJob';
 
 export class Nexrender implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Nexrender',
+		displayName: 'AutoGfx',
 		name: 'nexrender',
 		icon: 'file:nexrender.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Interact with Nexrender API',
+		description: 'Execute Nexrender API Requests',
 		defaults: {
 			name: 'Nexrender',
 		},
@@ -27,28 +27,19 @@ export class Nexrender implements INodeType {
 				required: false,
 			},
 		],
-		requestDefaults: {
-			baseURL: '={{$credentials.domain}}',
-			url: '={{$credentials.endpoint}}',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				'nexrender-secret': '={{$credentials.token}}',
-			},
-		},
 		properties: [
 			{
-				displayName: 'Resource',
+				displayName: 'Nexrender Tasks',
 				name: 'resource',
 				type: 'options',
 				noDataExpression: true,
 				options: [
 					{
 						name: 'Nexrender Task',
-						value: 'NexrenderDescription',
+						value: 'NexrenderJob',
 					},
 				],
-				default: 'NexrenderDescription',
+				default: 'NexrenderJob',
 			},
 			...NexrenderOperations,
 			...NexrenderFields,
@@ -61,6 +52,25 @@ export class Nexrender implements INodeType {
 
 		for (let i = 0; i < items.length; i++) {
 			const operation = this.getNodeParameter('operation', i) as string;
+			const credentials = this.getCredentials('nexrenderApi') as IDataObject;
+
+			if (!credentials) {
+				throw new Error('No credentials returned!');
+			}
+
+			console.log('Fetched Credentials:', credentials);  // Log credentials for debugging
+
+			const requestOptions: IDataObject = {
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+					'nexrender-secret': credentials.token,
+				},
+				baseURL: credentials.domain,
+				url: credentials.endpoint,
+				json: true,
+			};
+
 			let responseData;
 
 			if (operation === 'create') {
@@ -72,10 +82,10 @@ export class Nexrender implements INodeType {
 				};
 
 				responseData = await this.helpers.httpRequest({
+					...requestOptions,
 					method: 'POST',
-					url: '/jobs',
+					url: `${requestOptions.baseURL}${requestOptions.url}/jobs`,
 					body,
-					json: true,
 				});
 			} else if (operation === 'update') {
 				const jobId = this.getNodeParameter('jobId', i) as string;
@@ -87,36 +97,36 @@ export class Nexrender implements INodeType {
 				};
 
 				responseData = await this.helpers.httpRequest({
+					...requestOptions,
 					method: 'PUT',
-					url: `/jobs/${jobId}`,
+					url: `${requestOptions.baseURL}${requestOptions.url}/jobs/${jobId}`,
 					body,
-					json: true,
 				});
 			} else if (operation === 'get') {
 				const jobId = this.getNodeParameter('jobId', i) as string;
 				responseData = await this.helpers.httpRequest({
+					...requestOptions,
 					method: 'GET',
-					url: `/jobs/${jobId}`,
-					json: true,
+					url: `${requestOptions.baseURL}${requestOptions.url}/jobs/${jobId}`,
 				});
 			} else if (operation === 'list') {
 				responseData = await this.helpers.httpRequest({
+					...requestOptions,
 					method: 'GET',
-					url: '/jobs',
-					json: true,
+					url: `${requestOptions.baseURL}${requestOptions.url}/jobs`,
 				});
 			} else if (operation === 'delete') {
 				const jobId = this.getNodeParameter('jobId', i) as string;
 				responseData = await this.helpers.httpRequest({
+					...requestOptions,
 					method: 'DELETE',
-					url: `/jobs/${jobId}`,
-					json: true,
+					url: `${requestOptions.baseURL}${requestOptions.url}/jobs/${jobId}`,
 				});
 			} else if (operation === 'healthCheck') {
 				responseData = await this.helpers.httpRequest({
+					...requestOptions,
 					method: 'GET',
-					url: '/health',
-					json: true,
+					url: `${requestOptions.baseURL}${requestOptions.url}/health`,
 				});
 			}
 
