@@ -257,4 +257,3 @@ export class NexrenderApi implements ICredentialType {
 		},
 	};
 }
-
