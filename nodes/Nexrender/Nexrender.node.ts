@@ -68,11 +68,31 @@ export class Nexrender implements INodeType {
 			try {
 				if (operation === 'create') {
 					const body: IDataObject = {
-						templateSrc: this.getNodeParameter('templateSrc', i) as string,
-						composition: this.getNodeParameter('composition', i) as string,
+						tags: this.getNodeParameter('tags', i) as string,
+						priority: this.getNodeParameter('priority', i) as number,
+						template: {
+							src: this.getNodeParameter('templateSrc', i) as string,
+							composition: this.getNodeParameter('composition', i) as string,
+							frameStart: this.getNodeParameter('frameStart', i) as number,
+							frameEnd: this.getNodeParameter('frameEnd', i) as number,
+							continueOnMissing: this.getNodeParameter('continueOnMissing', i) as boolean,
+							settingsTemplate: this.getNodeParameter('settingsTemplate', i) as string,
+							outputModule: this.getNodeParameter('outputModule', i) as string,
+							outputExt: this.getNodeParameter('outputExt', i) as string,
+							renderSettings: this.getNodeParameter('renderSettings', i) as string,
+							outputSettings: this.getNodeParameter('outputSettings', i) as string,
+						},
 						assets: this.getNodeParameter('assets.asset', i) as IDataObject[],
-						actions: this.getNodeParameter('actions.action', i) as IDataObject[],
+						actions: {
+							predownload: [],
+							postdownload: [],
+							prerender: [],
+							postrender: this.getNodeParameter('actions.action', i) as IDataObject[],
+						},
 					};
+
+					// Debugging: Print the body payload
+					console.log('Request Body:', JSON.stringify(body, null, 2));
 
 					responseData = await this.helpers.httpRequest({
 						baseURL,
@@ -89,11 +109,31 @@ export class Nexrender implements INodeType {
 				} else if (operation === 'update') {
 					const jobId = this.getNodeParameter('jobId', i) as string;
 					const body: IDataObject = {
-						templateSrc: this.getNodeParameter('templateSrc', i) as string,
-						composition: this.getNodeParameter('composition', i) as string,
+						tags: this.getNodeParameter('tags', i) as string,
+						priority: this.getNodeParameter('priority', i) as number,
+						template: {
+							src: this.getNodeParameter('templateSrc', i) as string,
+							composition: this.getNodeParameter('composition', i) as string,
+							frameStart: this.getNodeParameter('frameStart', i) as number,
+							frameEnd: this.getNodeParameter('frameEnd', i) as number,
+							continueOnMissing: this.getNodeParameter('continueOnMissing', i) as boolean,
+							settingsTemplate: this.getNodeParameter('settingsTemplate', i) as string,
+							outputModule: this.getNodeParameter('outputModule', i) as string,
+							outputExt: this.getNodeParameter('outputExt', i) as string,
+							renderSettings: this.getNodeParameter('renderSettings', i) as string,
+							outputSettings: this.getNodeParameter('outputSettings', i) as string,
+						},
 						assets: this.getNodeParameter('assets.asset', i) as IDataObject[],
-						actions: this.getNodeParameter('actions.action', i) as IDataObject[],
+						actions: {
+							predownload: [],
+							postdownload: [],
+							prerender: [],
+							postrender: this.getNodeParameter('actions.action', i) as IDataObject[],
+						},
 					};
+
+					// Debugging: Print the body payload
+					console.log('Request Body:', JSON.stringify(body, null, 2));
 
 					responseData = await this.helpers.httpRequest({
 						baseURL,
@@ -162,10 +202,11 @@ export class Nexrender implements INodeType {
 				returnData.push({ json: responseData });
 			} catch (error) {
 				if (error.response) {
-					throw new NodeApiError(this.getNode(), error);
+					console.error('API Response Error:', error.response.data);
 				} else {
-					throw new NodeOperationError(this.getNode(), error.message);
+					console.error('Unknown Error:', error.message);
 				}
+				throw new NodeApiError(this.getNode(), error);
 			}
 		}
 
