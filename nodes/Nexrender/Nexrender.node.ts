@@ -29,15 +29,6 @@ export class Nexrender implements INodeType {
 				required: false,
 			},
 		],
-		requestDefaults: {
-			baseURL: '={{$credentials.domain}}',
-			url: '={{$credentials.endpoint}}',
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-				'nexrender-secret': '={{$credentials.token}}',
-			},
-		},
 		properties: [
 			{
 				displayName: 'Nexrender Tasks',
@@ -61,9 +52,10 @@ export class Nexrender implements INodeType {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
 
-		const credentials = this.getCredentials('nexrenderApi') as IDataObject;
-
-		if (!credentials) {
+		let credentials: IDataObject;
+		try {
+			credentials = await this.getCredentials('nexrenderApi') as IDataObject;
+		} catch (error) {
 			throw new NodeOperationError(this.getNode(), 'No credentials returned!');
 		}
 
