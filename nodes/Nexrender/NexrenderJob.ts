@@ -9,8 +9,8 @@ export const NexrenderOperations: INodeProperties[] = [
 		options: [
 			{ name: 'Create', value: 'create', description: 'Create a job', action: 'Create a job' },
 			{ name: 'Delete', value: 'delete', description: 'Delete a job', action: 'Delete a job' },
-			{ name: 'Get', value: 'get', description: 'Get a job', action: 'Get a job\'s info' },
-			{ name: 'Health Check', value: 'healthCheck', description: 'Check server status', action: 'Check server health' },
+			{ name: 'Get', value: 'get', description: 'Get a job', action: 'Get job info' },
+			{ name: 'Health Check', value: 'healthCheck', description: 'Check server status', action: 'Check server status' },
 			{ name: 'List', value: 'list', description: 'List all jobs', action: 'List all jobs' },
 			{ name: 'Update', value: 'update', description: 'Update a job', action: 'Update a job' },
 		],
