@@ -146,7 +146,7 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'Video', value: 'video' },
 						],
 						default: 'data',
-						description: 'Type of the asset (Auto-determined from source URI).',
+						description: 'Type of the asset (Auto-determined from source URI)',
 					},
 					{
 						displayName: 'Provider',
@@ -162,7 +162,7 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'HTTPS', value: 'https' },
 						],
 						default: 'file',
-						description: 'Provider of the asset. Auto-determined from the source URL.',
+						description: 'Provider of the asset. Auto-determined from the source URL',
 					},
 					{
 						displayName: 'Layer Name',
@@ -170,7 +170,7 @@ export const assetsTab: INodeProperties[] = [
 						type: 'string',
 						default: '',
 						placeholder: 'My_layerName',
-						description: 'Specify the layer name.',
+						description: 'Specify the layer name',
 					},
 					{
 						displayName: 'Layer Index',
@@ -178,7 +178,7 @@ export const assetsTab: INodeProperties[] = [
 						type: 'number',
 						default: null,
 						placeholder: '1',
-						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName.',
+						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName',
 					},
 					{
 						displayName: 'Property',
@@ -191,7 +191,7 @@ export const assetsTab: INodeProperties[] = [
 						},
 						default: '',
 						placeholder: 'Source Text, Position, Scale, Source Text.font, Effects.name.Color',
-						description: 'Property of the data asset.',
+						description: 'Property of the data asset',
 					},
 					{
 						displayName: 'Value',
@@ -203,7 +203,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: '',
-						description: 'Value of the data asset.',
+						description: 'Value of the data asset',
 					},
 					{
 						displayName: 'Expression',
@@ -215,7 +215,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: '',
-						description: 'Expression for the data asset.',
+						description: 'Expression for the data asset',
 					},
 					{
 						displayName: 'Large File?',
@@ -227,7 +227,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: false,
-						description: 'Whether to forgo copying the media to the work folder.',
+						description: 'Whether to forgo copying the media to the work folder',
 					},
 					{
 						displayName: 'Cache File?',
@@ -239,7 +239,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: false,
-						description: 'Whether to cache the file. Takes precedence over "Large File?".',
+						description: 'Whether to cache the file. Takes precedence over "Large File?"',
 					},
 					{
 						displayName: 'Cache Path',
@@ -251,7 +251,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: '/${workpath}/my-nexrender-cache',
-						description: 'Cache path for the asset.',
+						description: 'Cache path for the asset',
 					},
 				],
 			},
