@@ -7,12 +7,12 @@ export const NexrenderOperations: INodeProperties[] = [
 		type: 'options',
 		noDataExpression: true,
 		options: [
-			{ name: 'Create', value: 'create', description: 'Create a job' },
-			{ name: 'Get', value: 'get', description: 'Get a job' },
-			{ name: 'List', value: 'list', description: 'List all jobs' },
-			{ name: 'Update', value: 'update', description: 'Update a job' },
-			{ name: 'Delete', value: 'delete', description: 'Delete a job' },
-			{ name: 'Health Check', value: 'healthCheck', description: 'Check server health' },
+			{ name: 'Create', value: 'create', description: 'Create a job', action: 'Create a job' },
+			{ name: 'Delete', value: 'delete', description: 'Delete a job', action: 'Delete a job' },
+			{ name: 'Get', value: 'get', description: 'Get a job', action: 'Get a job' },
+			{ name: 'Health Check', value: 'healthCheck', description: 'Check server health', action: 'Check server health' },
+			{ name: 'List', value: 'list', description: 'List all jobs', action: 'List all jobs' },
+			{ name: 'Update', value: 'update', description: 'Update a job', action: 'Update a job' },
 		],
 		default: 'create',
 	},
@@ -23,13 +23,14 @@ export const mainTab: INodeProperties[] = [
 		displayName: 'Nexrender Task',
 		name: 'operation',
 		type: 'options',
+		noDataExpression: true,
 		options: [
-			{ name: 'Create', value: 'create', description: 'Create a job' },
-			{ name: 'Get', value: 'get', description: 'Get a job' },
-			{ name: 'List', value: 'list', description: 'List all jobs' },
-			{ name: 'Update', value: 'update', description: 'Update a job' },
-			{ name: 'Delete', value: 'delete', description: 'Delete a job' },
-			{ name: 'Health Check', value: 'healthCheck', description: 'Check server health' },
+			{ name: 'Create', value: 'create', description: 'Create a job', action: 'Create a job' },
+			{ name: 'Delete', value: 'delete', description: 'Delete a job', action: 'Delete a job' },
+			{ name: 'Get', value: 'get', description: 'Get a job', action: 'Get a job' },
+			{ name: 'Health Check', value: 'healthCheck', description: 'Check server health', action: 'Check server health' },
+			{ name: 'List', value: 'list', description: 'List all jobs', action: 'List all jobs' },
+			{ name: 'Update', value: 'update', description: 'Update a job', action: 'Update a job' },
 		],
 		default: 'create',
 	},
@@ -42,7 +43,7 @@ export const mainTab: INodeProperties[] = [
 		},
 		default: '',
 		required: true,
-		description: 'UID of the job to retrieve, update, or delete',
+		description: 'UID of the job to retrieve, update, or delete.',
 	},
 	{
 		displayName: 'AEP Project Source',
@@ -51,7 +52,7 @@ export const mainTab: INodeProperties[] = [
 		default: '',
 		placeholder: 'file:///project.aep',
 		required: true,
-		description: 'Location of the Project.aep',
+		description: 'Location of the Project.aep.',
 	},
 	{
 		displayName: 'Composition',
@@ -60,7 +61,7 @@ export const mainTab: INodeProperties[] = [
 		default: '',
 		required: true,
 		placeholder: 'MainComp->PreComp->PrePreComp',
-		description: 'Composition of the template being modified',
+		description: 'Composition of the template being modified.',
 	},
 	{
 		displayName: 'Render Output Location',
@@ -68,14 +69,14 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: '/folder/myrender.mov',
-		description: 'The output location for your rendered file',
+		description: 'The output location for your rendered file.',
 	},
 	{
 		displayName: 'Continue On Missing',
 		name: 'continueOnMissing',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to continue on missing assets',
+		description: 'Whether to continue on missing assets.',
 	},
 	{
 		displayName: 'Output Module',
@@ -83,7 +84,7 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: 'Lossless with Alpha',
-		description: 'AE Output Module for the job',
+		description: 'AE Output Module for the job.',
 	},
 	{
 		displayName: 'Output Extension',
@@ -91,14 +92,14 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: 'mov',
-		description: 'Output file extension for the job',
+		description: 'Output file extension for the job.',
 	},
 	{
 		displayName: 'Render Settings',
 		name: 'renderSettings',
 		type: 'string',
 		default: 'Best Settings',
-		description: 'AE Render Settings for the job',
+		description: 'AE Render Settings for the job.',
 	},
 	{
 		displayName: 'Output Settings',
@@ -106,7 +107,7 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: 'Comp Name',
-		description: 'AE Output Settings for the job',
+		description: 'AE Output Settings for the job.',
 	},
 ];
 
@@ -138,30 +139,30 @@ export const assetsTab: INodeProperties[] = [
 						name: 'type',
 						type: 'options',
 						options: [
+							{ name: 'Audio', value: 'audio' },
 							{ name: 'Data', value: 'data' },
 							{ name: 'Image', value: 'image' },
-							{ name: 'Audio', value: 'audio' },
-							{ name: 'Video', value: 'video' },
 							{ name: 'Static', value: 'static' },
+							{ name: 'Video', value: 'video' },
 						],
 						default: 'data',
-						description: 'Type of the asset (Auto-determined from source URI)',
+						description: 'Type of the asset (Auto-determined from source URI).',
 					},
 					{
 						displayName: 'Provider',
 						name: 'provider',
 						type: 'options',
 						options: [
+							{ name: 'Amazon S3', value: 's3' },
+							{ name: 'Data', value: 'data' },
 							{ name: 'File', value: 'file' },
+							{ name: 'FTP', value: 'ftp' },
+							{ name: 'Google Cloud Storage', value: 'gs' },
 							{ name: 'HTTP', value: 'http' },
 							{ name: 'HTTPS', value: 'https' },
-							{ name: 'Data', value: 'data' },
-							{ name: 'Google Cloud Storage', value: 'gs' },
-							{ name: 'Amazon S3', value: 's3' },
-							{ name: 'FTP', value: 'ftp' },
 						],
 						default: 'file',
-						description: 'Provider of the asset. Auto-determined from the source URL',
+						description: 'Provider of the asset. Auto-determined from the source URL.',
 					},
 					{
 						displayName: 'Layer Name',
@@ -169,7 +170,7 @@ export const assetsTab: INodeProperties[] = [
 						type: 'string',
 						default: '',
 						placeholder: 'My_layerName',
-						description: 'Specify the layer name',
+						description: 'Specify the layer name.',
 					},
 					{
 						displayName: 'Layer Index',
@@ -177,7 +178,7 @@ export const assetsTab: INodeProperties[] = [
 						type: 'number',
 						default: null,
 						placeholder: '1',
-						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName',
+						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName.',
 					},
 					{
 						displayName: 'Property',
@@ -190,7 +191,7 @@ export const assetsTab: INodeProperties[] = [
 						},
 						default: '',
 						placeholder: 'Source Text, Position, Scale, Source Text.font, Effects.name.Color',
-						description: 'Property of the data asset',
+						description: 'Property of the data asset.',
 					},
 					{
 						displayName: 'Value',
@@ -202,7 +203,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: '',
-						description: 'Value of the data asset',
+						description: 'Value of the data asset.',
 					},
 					{
 						displayName: 'Expression',
@@ -214,7 +215,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: '',
-						description: 'Expression for the data asset',
+						description: 'Expression for the data asset.',
 					},
 					{
 						displayName: 'Large File?',
@@ -226,7 +227,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: false,
-						description: 'Whether to forgo copying the media to the work folder',
+						description: 'Whether to forgo copying the media to the work folder.',
 					},
 					{
 						displayName: 'Cache File?',
@@ -238,7 +239,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: false,
-						description: 'Whether to cache the file. Takes precedence over "Large File?"',
+						description: 'Whether to cache the file. Takes precedence over "Large File?".',
 					},
 					{
 						displayName: 'Cache Path',
@@ -250,7 +251,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: '/${workpath}/my-nexrender-cache',
-						description: 'Cache path for the asset',
+						description: 'Cache path for the asset.',
 					},
 				],
 			},
@@ -261,7 +262,7 @@ export const assetsTab: INodeProperties[] = [
 		name: 'assetsOverride',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to enable manual JSON for putting assets in the job request (not recommended)',
+		description: 'Whether to enable manual JSON for putting assets in the job request (not recommended).',
 	},
 	{
 		displayName: 'Manual Assets JSON',
@@ -277,7 +278,7 @@ export const assetsTab: INodeProperties[] = [
 		},
 		default: '',
 		required: true,
-		description: 'Assets for the job (JSON format)',
+		description: 'Assets for the job (JSON format).',
 	},
 ];
 
@@ -292,8 +293,8 @@ export const actionsTab: INodeProperties[] = [
 			{ name: 'Pre-render', value: 'prerender' },
 			{ name: 'Post-render', value: 'postrender' },
 		],
-		default: '',
-		description: 'Select a Render Action type to configure',
+		default: 'predownload',
+		description: 'Select a Render Action type to configure.',
 	},
 	{
 		displayName: 'Pre-Download Actions',
@@ -309,7 +310,7 @@ export const actionsTab: INodeProperties[] = [
 		},
 		default: '[]',
 		placeholder: '[{"Actions": "go here"}]',
-		description: 'Pre-download actions (JSON format)',
+		description: 'Pre-download actions (JSON format).',
 	},
 	{
 		displayName: 'Post-Download Actions',
@@ -325,7 +326,7 @@ export const actionsTab: INodeProperties[] = [
 		},
 		default: '[]',
 		placeholder: '[{"Actions": "go here"}]',
-		description: 'Post-Download actions (JSON format)',
+		description: 'Post-Download actions (JSON format).',
 	},
 	{
 		displayName: 'Pre-Render Actions',
@@ -341,7 +342,7 @@ export const actionsTab: INodeProperties[] = [
 		},
 		default: '[]',
 		placeholder: '[{"Actions": "go here"}]',
-		description: 'Pre-Render actions (JSON format)',
+		description: 'Pre-Render actions (JSON format).',
 	},
 	{
 		displayName: 'Post-Render Actions',
@@ -369,7 +370,7 @@ export const actionsTab: INodeProperties[] = [
                 }
             }
         ]`,
-		description: 'Post-Render actions (JSON format)',
+		description: 'Post-Render actions (JSON format).',
 	},
 ];
 
