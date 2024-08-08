@@ -4,6 +4,8 @@ import {
 	INodeType,
 	INodeTypeDescription,
 	IDataObject,
+	NodeApiError,
+	NodeOperationError,
 } from 'n8n-workflow';
 import { NexrenderOperations, NexrenderFields } from './NexrenderJob';
 
@@ -27,6 +29,15 @@ export class Nexrender implements INodeType {
 				required: false,
 			},
 		],
+		requestDefaults: {
+			baseURL: '={{$credentials.domain}}',
+			url: '={{$credentials.endpoint}}',
+			headers: {
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+				'nexrender-secret': '={{$credentials.token}}',
+			},
+		},
 		properties: [
 			{
 				displayName: 'Nexrender Tasks',
@@ -50,86 +61,76 @@ export class Nexrender implements INodeType {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
 
-		const credentials = await this.getCredentials('nexrenderApi') as IDataObject;
-
-		if (!credentials) {
-			throw new Error('No credentials returned!');
-		}
-
 		for (let i = 0; i < items.length; i++) {
 			const operation = this.getNodeParameter('operation', i) as string;
-
-			const requestOptions: IDataObject = {
-				headers: {
-					Accept: 'application/json',
-					'Content-Type': 'application/json',
-					'nexrender-secret': credentials.token,
-				},
-				baseURL: credentials.domain,
-				url: credentials.endpoint,
-				json: true,
-			};
-
 			let responseData;
 
-			if (operation === 'create') {
-				const body: IDataObject = {
-					templateSrc: this.getNodeParameter('templateSrc', i) as string,
-					composition: this.getNodeParameter('composition', i) as string,
-					assets: this.getNodeParameter('assets.asset', i) as IDataObject[],
-					actions: this.getNodeParameter('actions.action', i) as IDataObject[],
-				};
+			try {
+				if (operation === 'create') {
+					const body: IDataObject = {
+						templateSrc: this.getNodeParameter('templateSrc', i) as string,
+						composition: this.getNodeParameter('composition', i) as string,
+						assets: this.getNodeParameter('assets.asset', i) as IDataObject[],
+						actions: this.getNodeParameter('actions.action', i) as IDataObject[],
+					};
 
-				responseData = await this.helpers.httpRequest({
-					...requestOptions,
-					method: 'POST',
-					url: `${requestOptions.baseURL}${requestOptions.url}/jobs`,
-					body,
-				});
-			} else if (operation === 'update') {
-				const jobId = this.getNodeParameter('jobId', i) as string;
-				const body: IDataObject = {
-					templateSrc: this.getNodeParameter('templateSrc', i) as string,
-					composition: this.getNodeParameter('composition', i) as string,
-					assets: this.getNodeParameter('assets.asset', i) as IDataObject[],
-					actions: this.getNodeParameter('actions.action', i) as IDataObject[],
-				};
+					responseData = await this.helpers.httpRequest({
+						method: 'POST',
+						url: '/jobs',
+						body,
+						json: true,
+					});
+				} else if (operation === 'update') {
+					const jobId = this.getNodeParameter('jobId', i) as string;
+					const body: IDataObject = {
+						templateSrc: this.getNodeParameter('templateSrc', i) as string,
+						composition: this.getNodeParameter('composition', i) as string,
+						assets: this.getNodeParameter('assets.asset', i) as IDataObject[],
+						actions: this.getNodeParameter('actions.action', i) as IDataObject[],
+					};
 
-				responseData = await this.helpers.httpRequest({
-					...requestOptions,
-					method: 'PUT',
-					url: `${requestOptions.baseURL}${requestOptions.url}/jobs/${jobId}`,
-					body,
-				});
-			} else if (operation === 'get') {
-				const jobId = this.getNodeParameter('jobId', i) as string;
-				responseData = await this.helpers.httpRequest({
-					...requestOptions,
-					method: 'GET',
-					url: `${requestOptions.baseURL}${requestOptions.url}/jobs/${jobId}`,
-				});
-			} else if (operation === 'list') {
-				responseData = await this.helpers.httpRequest({
-					...requestOptions,
-					method: 'GET',
-					url: `${requestOptions.baseURL}${requestOptions.url}/jobs`,
-				});
-			} else if (operation === 'delete') {
-				const jobId = this.getNodeParameter('jobId', i) as string;
-				responseData = await this.helpers.httpRequest({
-					...requestOptions,
-					method: 'DELETE',
-					url: `${requestOptions.baseURL}${requestOptions.url}/jobs/${jobId}`,
-				});
-			} else if (operation === 'healthCheck') {
-				responseData = await this.helpers.httpRequest({
-					...requestOptions,
-					method: 'GET',
-					url: `${requestOptions.baseURL}${requestOptions.url}/health`,
-				});
+					responseData = await this.helpers.httpRequest({
+						method: 'PUT',
+						url: `/jobs/${jobId}`,
+						body,
+						json: true,
+					});
+				} else if (operation === 'get') {
+					const jobId = this.getNodeParameter('jobId', i) as string;
+					responseData = await this.helpers.httpRequest({
+						method: 'GET',
+						url: `/jobs/${jobId}`,
+						json: true,
+					});
+				} else if (operation === 'list') {
+					responseData = await this.helpers.httpRequest({
+						method: 'GET',
+						url: '/jobs',
+						json: true,
+					});
+				} else if (operation === 'delete') {
+					const jobId = this.getNodeParameter('jobId', i) as string;
+					responseData = await this.helpers.httpRequest({
+						method: 'DELETE',
+						url: `/jobs/${jobId}`,
+						json: true,
+					});
+				} else if (operation === 'healthCheck') {
+					responseData = await this.helpers.httpRequest({
+						method: 'GET',
+						url: '/health',
+						json: true,
+					});
+				}
+
+				returnData.push({ json: responseData });
+			} catch (error) {
+				if (error.response) {
+					throw new NodeApiError(this.getNode(), error);
+				} else {
+					throw new NodeOperationError(this.getNode(), error.message);
+				}
 			}
-
-			returnData.push({ json: responseData });
 		}
 
 		return [returnData];
