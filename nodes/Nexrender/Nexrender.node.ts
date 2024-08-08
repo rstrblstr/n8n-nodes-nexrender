@@ -91,9 +91,6 @@ export class Nexrender implements INodeType {
 						},
 					};
 
-					// Debugging: Print the body payload
-					console.log('Request Body:', JSON.stringify(body, null, 2));
-
 					responseData = await this.helpers.httpRequest({
 						baseURL,
 						method: 'POST',
@@ -131,9 +128,6 @@ export class Nexrender implements INodeType {
 							postrender: this.getNodeParameter('actions.action', i) as IDataObject[],
 						},
 					};
-
-					// Debugging: Print the body payload
-					console.log('Request Body:', JSON.stringify(body, null, 2));
 
 					responseData = await this.helpers.httpRequest({
 						baseURL,
@@ -202,11 +196,10 @@ export class Nexrender implements INodeType {
 				returnData.push({ json: responseData });
 			} catch (error) {
 				if (error.response) {
-					console.error('API Response Error:', error.response.data);
+					throw new NodeApiError(this.getNode(), error, { message: `API Response Error: ${error.response.data}` });
 				} else {
-					console.error('Unknown Error:', error.message);
+					throw new NodeApiError(this.getNode(), error, { message: `Unknown Error: ${error.message}` });
 				}
-				throw new NodeApiError(this.getNode(), error);
 			}
 		}
 
