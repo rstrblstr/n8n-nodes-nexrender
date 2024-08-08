@@ -65,126 +65,136 @@ export const mainTab: INodeProperties[] = [
 		description: 'Whether to continue on missing assets',
 	},
 	{
-		displayName: 'Output Options',
-		name: 'outputopts',
-		type: 'fixedCollection',
-		default: {},
+		displayName: 'Workfolder Render Output Path',
+		name: 'outputLocation',
+		type: 'string',
 		displayOptions: {
 			show: { operation: ['create', 'update'] },
 		},
-		options: [
-			{
-				name: 'output',
-				displayName: 'Output',
-				values: [
-					{
-						displayName: 'Workfolder Render Output Path',
-						name: 'outputLocation',
-						type: 'string',
-						default: '',
-						placeholder: '/folder/myrender.mov',
-						description: 'The workfolder output location for your rendered temp file',
-					},
-					{
-						displayName: 'Keep Renders After Finish',
-						name: 'keepRender',
-						type: 'boolean',
-						default: true,
-						description: 'Whether to keep final renders after finish',
-					},
-					{
-						displayName: 'Use Job UID As Final Render Filename',
-						name: 'useJobId',
-						type: 'boolean',
-						displayOptions: {
-							show: {
-								operation: ['create', 'update'],
-								keepRender: [true],
-							},
-						},
-						default: true,
-						description: 'Whether to keep the final render (optional if you want to immediately process/upload the Output Render in other ways)',
-					},
-					{
-						displayName: 'Copy Final Render To',
-						name: 'copyLocation',
-						type: 'string',
-						default: '/render/',
-						displayOptions: {
-							show: {
-								useJobId: [true],
-								keepRender: [true],
-							},
-						},
-						placeholder: '/full/path/to/folder/',
-						description: 'The permanent output folder path to copy your render to',
-					},
-					{
-						displayName: 'Copy Final Render To',
-						name: 'copyLocation',
-						type: 'string',
-						default: '/render/finalrender.mov',
-						displayOptions: {
-							show: {
-								useJobId: [false],
-								keepRender: [true],
-							},
-						},
-						placeholder: '/full/path/to/finalrender.mov',
-						description: 'The permanent output file path to copy your render to',
-					},
-					{
-						displayName: 'Output Module',
-						name: 'outputModule',
-						type: 'string',
-						default: 'Lossless with Alpha',
-						description: 'AE Output Module for the job',
-					},
-					{
-						displayName: 'Output Extension',
-						name: 'outputExt',
-						type: 'string',
-						default: 'mov',
-						description: 'Output file extension for the job',
-					},
-					{
-						displayName: 'Render Settings',
-						name: 'renderSettings',
-						type: 'string',
-						default: 'Best Settings',
-						description: 'AE Render Settings for the job',
-					},
-					{
-						displayName: 'Starting Frame Number',
-						name: 'frameStart',
-						type: 'number',
-						default: 0,
-						description: 'Frame number to start rendering on',
-					},
-					{
-						displayName: 'Ending Frame Number',
-						name: 'frameEnd',
-						type: 'number',
-						default: null,
-						description: 'Frame number to end rendering on',
-					},
-					{
-						displayName: 'Render Priority',
-						name: 'priority',
-						type: 'number',
-						default: 5,
-						description: 'Job render priority (lower number is higher priority)',
-					},
-					{
-						displayName: 'Job Tags',
-						name: 'tags',
-						type: 'string',
-						default: '',
-						description: 'Job categorization tags',
-					},
-				],
+		default: '',
+		placeholder: '/folder/myrender.mov',
+		description: 'The workfolder output location for your rendered temp file',
+	},
+	{
+		displayName: 'Keep Renders After Finish',
+		name: 'keepRender',
+		type: 'boolean',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: true,
+		description: 'Whether to keep final renders after finish',
+	},
+	{
+		displayName: 'Use Job UID As Final Render Filename',
+		name: 'useJobId',
+		type: 'boolean',
+		displayOptions: {
+			show: {
+				operation: ['create', 'update'],
+				keepRender: [true],
 			},
-		],
+		},
+		default: true,
+		description: 'Whether to keep the final render (optional if you want to immediately process/upload the Output Render in other ways)',
+	},
+	{
+		displayName: 'Copy Final Render To (Folder)',
+		name: 'copyLocation',
+		type: 'string',
+		displayOptions: {
+			show: {
+				useJobId: [true],
+				keepRender: [true],
+			},
+		},
+		default: '/render/',
+		placeholder: '/full/path/to/folder/',
+		description: 'The permanent output folder path to copy your render to',
+	},
+	{
+		displayName: 'Copy Final Render To (File)',
+		name: 'copyLocation',
+		type: 'string',
+		displayOptions: {
+			show: {
+				useJobId: [false],
+				keepRender: [true],
+			},
+		},
+		default: '/render/finalrender.mov',
+		placeholder: '/full/path/to/finalrender.mov',
+		description: 'The permanent output file path to copy your render to',
+	},
+	{
+		displayName: 'Output Module',
+		name: 'outputModule',
+		type: 'string',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: 'Lossless with Alpha',
+		description: 'AE Output Module for the job',
+	},
+	{
+		displayName: 'Output Extension',
+		name: 'outputExt',
+		type: 'string',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: 'mov',
+		description: 'Output file extension for the job',
+	},
+	{
+		displayName: 'Render Settings',
+		name: 'renderSettings',
+		type: 'string',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: 'Best Settings',
+		description: 'AE Render Settings for the job',
+	},
+	{
+		displayName: 'Starting Frame Number',
+		name: 'frameStart',
+		type: 'number',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: 0,
+		description: 'Frame number to start rendering on',
+	},
+	{
+		displayName: 'Ending Frame Number',
+		name: 'frameEnd',
+		type: 'number',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: null,
+		description: 'Frame number to end rendering on',
+	},
+	{
+		displayName: 'Render Priority',
+		name: 'priority',
+		type: 'number',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: 5,
+		description: 'Job render priority (lower number is higher priority)',
+	},
+	{
+		displayName: 'Job Tags',
+		name: 'tags',
+		type: 'string',
+		displayOptions: {
+			show: { operation: ['create', 'update'] },
+		},
+		default: '',
+		description: 'Job categorization tags',
 	},
 ];
 
