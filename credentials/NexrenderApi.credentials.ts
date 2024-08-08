@@ -11,16 +11,6 @@ export class NexrenderApi implements ICredentialType {
 	documentationUrl = 'https://autogfx.x.ccroww.com';
 	properties: INodeProperties[] = [
 		{
-			displayName: 'API Secret',
-			name: 'token',
-			type: 'string',
-			default: 'myapisecret',
-			description: 'Your secret API key',
-			typeOptions: {
-				password: true,
-			},
-		},
-		{
 			displayName: 'Hostname',
 			name: 'domain',
 			type: 'string',
@@ -35,6 +25,16 @@ export class NexrenderApi implements ICredentialType {
 			default: '/api/v1',
 			required: true,
 			description: 'The Nexrender API endpoint',
+		},
+		{
+			displayName: 'API Secret',
+			name: 'token',
+			type: 'string',
+			placeholder: 'myapisecret',
+			description: 'Your secret API key',
+			typeOptions: {
+				password: true,
+			},
 		},
 		{
 			displayName: 'Service Provider',
