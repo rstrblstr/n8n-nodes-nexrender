@@ -30,7 +30,7 @@ export class NexrenderApi implements ICredentialType {
 			displayName: 'API Secret',
 			name: 'token',
 			type: 'string',
-			placeholder: 'myapisecret',
+			default: 'myapisecret',
 			description: 'Your secret API key',
 			typeOptions: {
 				password: true,
