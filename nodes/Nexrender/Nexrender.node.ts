@@ -61,6 +61,10 @@ export class Nexrender implements INodeType {
 		const items = this.getInputData();
 		const returnData: INodeExecutionData[] = [];
 
+		const credentials = await this.getCredentials('nexrenderApi');
+
+		console.log('Fetched Credentials:', credentials); // Debugging log
+
 		for (let i = 0; i < items.length; i++) {
 			const operation = this.getNodeParameter('operation', i) as string;
 			let responseData;
@@ -75,8 +79,14 @@ export class Nexrender implements INodeType {
 					};
 
 					responseData = await this.helpers.httpRequest({
+						baseURL: credentials.domain,
 						method: 'POST',
-						url: '/jobs',
+						url: credentials.endpoint + '/jobs',
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'nexrender-secret': credentials.token,
+						},
 						body,
 						json: true,
 					});
@@ -90,35 +100,65 @@ export class Nexrender implements INodeType {
 					};
 
 					responseData = await this.helpers.httpRequest({
+						baseURL: credentials.domain,
 						method: 'PUT',
-						url: `/jobs/${jobId}`,
+						url: credentials.endpoint + `/jobs/${jobId}`,
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'nexrender-secret': credentials.token,
+						},
 						body,
 						json: true,
 					});
 				} else if (operation === 'get') {
 					const jobId = this.getNodeParameter('jobId', i) as string;
 					responseData = await this.helpers.httpRequest({
+						baseURL: credentials.domain,
 						method: 'GET',
-						url: `/jobs/${jobId}`,
+						url: credentials.endpoint + `/jobs/${jobId}`,
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'nexrender-secret': credentials.token,
+						},
 						json: true,
 					});
 				} else if (operation === 'list') {
 					responseData = await this.helpers.httpRequest({
+						baseURL: credentials.domain,
 						method: 'GET',
-						url: '/jobs',
+						url: credentials.endpoint + '/jobs',
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'nexrender-secret': credentials.token,
+						},
 						json: true,
 					});
 				} else if (operation === 'delete') {
 					const jobId = this.getNodeParameter('jobId', i) as string;
 					responseData = await this.helpers.httpRequest({
+						baseURL: credentials.domain,
 						method: 'DELETE',
-						url: `/jobs/${jobId}`,
+						url: credentials.endpoint + `/jobs/${jobId}`,
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'nexrender-secret': credentials.token,
+						},
 						json: true,
 					});
 				} else if (operation === 'healthCheck') {
 					responseData = await this.helpers.httpRequest({
+						baseURL: credentials.domain,
 						method: 'GET',
-						url: '/health',
+						url: credentials.endpoint + '/health',
+						headers: {
+							Accept: 'application/json',
+							'Content-Type': 'application/json',
+							'nexrender-secret': credentials.token,
+						},
 						json: true,
 					});
 				}
