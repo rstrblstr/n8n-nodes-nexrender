@@ -496,51 +496,6 @@ export const actionsTab: INodeProperties[] = [
 						displayOptions: {
 							show: {
 								actionType: ['postrender'],
-								keepRender: [true],
-							},
-						},
-					},
-					{
-						displayName: 'Action JSON',
-						name: 'actionJson',
-						type: 'string',
-						typeOptions: {
-							rows: 10,
-						},
-						default: `[
-							{
-								"module": "@nexrender/action-encode",
-								"preset": "mp4",
-								"output": "encoded.mp4"
-							},
-							{
-								"module": "@nexrender/nexrender-action-webhook",
-								"url": "http://example.com/webhook",
-								"method": "POST",
-								"headers": {
-									"Content-Type": "application/json",
-									"WebhookSecret": "{{ $credentials.webhooktoken }}"
-								},
-								"json": {
-									"uid": "{job.uid}",
-									"state": "{job.state}",
-									"type": "{job.type}",
-									"tags": "{job.tags}",
-									"renderProgress": "{job.renderProgress}",
-									"createdAt": "{job.createdAt}",
-									"updatedAt": "{job.updatedAt}",
-									"startedAt": "{job.startedAt}",
-									"jobCreator": "{job.jobCreator}",
-									"jobExecutor": "{job.jobExecutor}"
-								}
-							}
-						]`,
-						placeholder: '[{"Actions": "go here"}]',
-						description: 'Action details (JSON format)',
-						displayOptions: {
-							show: {
-								actionType: ['postrender'],
-								keepRender: [false],
 							},
 						},
 					},
