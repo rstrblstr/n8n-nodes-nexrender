@@ -35,208 +35,191 @@ export class NexrenderApi implements ICredentialType {
 			description: 'The Nexrender API endpoint',
 		},
 		{
-			displayName: 'Provider & Uploader Credentials',
-			name: 'providerCreds',
-			type: 'fixedCollection',
-			default: {},
-			typeOptions: {
-				multipleValues: true,
-			},
+			displayName: 'Service Provider',
+			name: 'provider',
+			type: 'options',
 			options: [
-				{
-					name: 'provider',
-					displayName: 'Service Provider',
-					values: [
-						{
-							displayName: 'Protocol',
-							name: 'providerProtocol',
-							type: 'options',
-							options: [
-								{ name: 'AWS S3', value: 'credS3' },
-								{ name: 'FTP', value: 'credSFTP' },
-								{ name: 'GCS', value: 'credGCS' },
-								{ name: 'None', value: 'credNone' },
-								{ name: 'Other', value: 'credOther' },
-							],
-							default: 'credNone',
-							description: 'Choose an upload service provider',
-						},
-						// Fields for S3
-						{
-							displayName: 'Access Key ID',
-							name: 's3AccessKeyId',
-							type: 'string',
-							typeOptions: { password: true },
-							default: '',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credS3'],
-								},
-							},
-						},
-						{
-							displayName: 'Secret Access Key',
-							name: 's3SecretAccessKey',
-							type: 'string',
-							typeOptions: { password: true },
-							default: '',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credS3'],
-								},
-							},
-						},
-						{
-							displayName: 'Region',
-							name: 's3Region',
-							type: 'string',
-							default: 'us-east-1',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credS3'],
-								},
-							},
-						},
-						{
-							displayName: 'Bucket',
-							name: 's3Bucket',
-							type: 'string',
-							default: '',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credS3'],
-								},
-							},
-						},
-						{
-							displayName: 'ACL',
-							name: 's3Acl',
-							type: 'string',
-							default: 'public-read',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credS3'],
-								},
-							},
-						},
-						// Fields for GCS
-						{
-							displayName: 'Bucket',
-							name: 'gcsBucket',
-							type: 'string',
-							default: '',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credGCS'],
-								},
-							},
-						},
-						// Fields for SFTP
-						{
-							displayName: 'Host',
-							name: 'sftpHost',
-							type: 'string',
-							default: 'localhost',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credSFTP'],
-								},
-							},
-						},
-						{
-							displayName: 'Port',
-							name: 'sftpPort',
-							type: 'number',
-							default: 21,
-							displayOptions: {
-								show: {
-									providerProtocol: ['credSFTP'],
-								},
-							},
-						},
-						{
-							displayName: 'SSL Encryption',
-							name: 'sftpSSL',
-							type: 'boolean',
-							default: true,
-							displayOptions: {
-								show: {
-									providerProtocol: ['credSFTP'],
-								},
-							},
-						},
-						{
-							displayName: 'User',
-							name: 'sftpUser',
-							type: 'string',
-							default: 'anonymous',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credSFTP'],
-								},
-							},
-						},
-						{
-							displayName: 'Password',
-							name: 'sftpPassword',
-							type: 'string',
-							typeOptions: { password: true },
-							default: 'anonymous@',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credSFTP'],
-								},
-							},
-						},
-						// Fields for Other
-						{
-							displayName: 'Host',
-							name: 'otherHost',
-							type: 'string',
-							default: 'localhost',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credOther'],
-								},
-							},
-						},
-						{
-							displayName: 'Port',
-							name: 'otherPort',
-							type: 'number',
-							default: null,
-							displayOptions: {
-								show: {
-									providerProtocol: ['credOther'],
-								},
-							},
-						},
-						{
-							displayName: 'User',
-							name: 'otherUser',
-							type: 'string',
-							default: 'anonymous',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credOther'],
-								},
-							},
-						},
-						{
-							displayName: 'Password',
-							name: 'otherPassword',
-							type: 'string',
-							typeOptions: { password: true },
-							default: 'anonymous@',
-							displayOptions: {
-								show: {
-									providerProtocol: ['credOther'],
-								},
-							},
-						},
-					],
-				},
+				{ name: 'None', value: 'credNone' },
+				{ name: 'AWS S3', value: 'credS3' },
+				{ name: 'FTP', value: 'credSFTP' },
+				{ name: 'GCS', value: 'credGCS' },
+				{ name: 'Other', value: 'credOther' },
 			],
+			default: 'credNone',
+			description: 'Choose an upload service provider',
+		},
+		// Fields for S3
+		{
+			displayName: 'S3 Access Key ID',
+			name: 's3AccessKeyId',
+			type: 'string',
+			typeOptions: { password: true },
+			default: '',
+			displayOptions: {
+				show: {
+					provider: ['credS3'],
+				},
+			},
+		},
+		{
+			displayName: 'S3 Secret Access Key',
+			name: 's3SecretAccessKey',
+			type: 'string',
+			typeOptions: { password: true },
+			default: '',
+			displayOptions: {
+				show: {
+					provider: ['credS3'],
+				},
+			},
+		},
+		{
+			displayName: 'S3 Region',
+			name: 's3Region',
+			type: 'string',
+			default: 'us-east-1',
+			displayOptions: {
+				show: {
+					provider: ['credS3'],
+				},
+			},
+		},
+		{
+			displayName: 'S3 Bucket',
+			name: 's3Bucket',
+			type: 'string',
+			default: '',
+			displayOptions: {
+				show: {
+					provider: ['credS3'],
+				},
+			},
+		},
+		{
+			displayName: 'S3 ACL',
+			name: 's3Acl',
+			type: 'string',
+			default: 'public-read',
+			displayOptions: {
+				show: {
+					provider: ['credS3'],
+				},
+			},
+		},
+		// Fields for GCS
+		{
+			displayName: 'GCS Bucket',
+			name: 'gcsBucket',
+			type: 'string',
+			default: '',
+			displayOptions: {
+				show: {
+					provider: ['credGCS'],
+				},
+			},
+		},
+		// Fields for SFTP
+		{
+			displayName: 'SFTP Host',
+			name: 'sftpHost',
+			type: 'string',
+			default: 'localhost',
+			displayOptions: {
+				show: {
+					provider: ['credSFTP'],
+				},
+			},
+		},
+		{
+			displayName: 'SFTP Port',
+			name: 'sftpPort',
+			type: 'number',
+			default: 21,
+			displayOptions: {
+				show: {
+					provider: ['credSFTP'],
+				},
+			},
+		},
+		{
+			displayName: 'SFTP SSL Encryption',
+			name: 'sftpSSL',
+			type: 'boolean',
+			default: true,
+			displayOptions: {
+				show: {
+					provider: ['credSFTP'],
+				},
+			},
+		},
+		{
+			displayName: 'SFTP User',
+			name: 'sftpUser',
+			type: 'string',
+			default: 'anonymous',
+			displayOptions: {
+				show: {
+					provider: ['credSFTP'],
+				},
+			},
+		},
+		{
+			displayName: 'SFTP Password',
+			name: 'sftpPassword',
+			type: 'string',
+			typeOptions: { password: true },
+			default: 'anonymous@',
+			displayOptions: {
+				show: {
+					provider: ['credSFTP'],
+				},
+			},
+		},
+		// Fields for Other
+		{
+			displayName: 'Other Host',
+			name: 'otherHost',
+			type: 'string',
+			default: 'localhost',
+			displayOptions: {
+				show: {
+					provider: ['credOther'],
+				},
+			},
+		},
+		{
+			displayName: 'Other Port',
+			name: 'otherPort',
+			type: 'number',
+			default: null,
+			displayOptions: {
+				show: {
+					provider: ['credOther'],
+				},
+			},
+		},
+		{
+			displayName: 'Other User',
+			name: 'otherUser',
+			type: 'string',
+			default: 'anonymous',
+			displayOptions: {
+				show: {
+					provider: ['credOther'],
+				},
+			},
+		},
+		{
+			displayName: 'Other Password',
+			name: 'otherPassword',
+			type: 'string',
+			typeOptions: { password: true },
+			default: 'anonymous@',
+			displayOptions: {
+				show: {
+					provider: ['credOther'],
+				},
+			},
 		},
 	];
 

@@ -286,91 +286,44 @@ export const actionsTab: INodeProperties[] = [
 	{
 		displayName: 'Actions',
 		name: 'actions',
-		type: 'options',
+		type: 'fixedCollection',
+		placeholder: 'Add Action',
+		default: {},
+		typeOptions: {
+			multipleValues: true,
+		},
 		options: [
-			{ name: 'Pre-Download', value: 'predownload' },
-			{ name: 'Post-Download', value: 'postdownload' },
-			{ name: 'Pre-Render', value: 'prerender' },
-			{ name: 'Post-Render', value: 'postrender' },
+			{
+				name: 'action',
+				displayName: 'Action',
+				values: [
+					{
+						displayName: 'Action Type',
+						name: 'actionType',
+						type: 'options',
+						options: [
+							{ name: 'Pre-Download', value: 'predownload' },
+							{ name: 'Post-Download', value: 'postdownload' },
+							{ name: 'Pre-Render', value: 'prerender' },
+							{ name: 'Post-Render', value: 'postrender' },
+						],
+						default: 'predownload',
+						description: 'Select a Render Action type to configure',
+					},
+					{
+						displayName: 'Action JSON',
+						name: 'actionJson',
+						type: 'string',
+						typeOptions: {
+							rows: 10,
+						},
+						default: '[]',
+						placeholder: '[{"Actions": "go here"}]',
+						description: 'Action details (JSON format)',
+					},
+				],
+			},
 		],
-		default: 'predownload',
-		description: 'Select a Render Action type to configure',
-	},
-	{
-		displayName: 'Pre-Download Actions',
-		name: 'predownload',
-		type: 'string',
-		typeOptions: {
-			rows: 10,
-		},
-		displayOptions: {
-			show: {
-				actions: ['predownload'],
-			},
-		},
-		default: '[]',
-		placeholder: '[{"Actions": "go here"}]',
-		description: 'Pre-download actions (JSON format)',
-	},
-	{
-		displayName: 'Post-Download Actions',
-		name: 'postdownload',
-		type: 'string',
-		typeOptions: {
-			rows: 10,
-		},
-		displayOptions: {
-			show: {
-				actions: ['postdownload'],
-			},
-		},
-		default: '[]',
-		placeholder: '[{"Actions": "go here"}]',
-		description: 'Post-Download actions (JSON format)',
-	},
-	{
-		displayName: 'Pre-Render Actions',
-		name: 'prerender',
-		type: 'string',
-		typeOptions: {
-			rows: 10,
-		},
-		displayOptions: {
-			show: {
-				actions: ['prerender'],
-			},
-		},
-		default: '[]',
-		placeholder: '[{"Actions": "go here"}]',
-		description: 'Pre-Render actions (JSON format)',
-	},
-	{
-		displayName: 'Post-Render Actions',
-		name: 'postrender',
-		type: 'string',
-		typeOptions: {
-			rows: 10,
-		},
-		displayOptions: {
-			show: {
-				actions: ['postrender'],
-			},
-		},
-		default: `[
-            {
-                "module": "@nexrender/action-upload",
-                "input": "result.mp4",
-                "provider": "ftp",
-                "params": {
-                    "host": "ftp.example.com",
-                    "port": 21,
-                    "user": "root",
-                    "password": "pass123123",
-                    "output": "/var/mystuff/output.mp4"
-                }
-            }
-        ]`,
-		description: 'Post-Render actions (JSON format)',
 	},
 ];
 
