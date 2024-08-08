@@ -11,7 +11,7 @@ import { NexrenderOperations, NexrenderFields } from './NexrenderJob';
 
 export class Nexrender implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'AutoGfx',
+		displayName: 'Nexrender',
 		name: 'nexrender',
 		icon: 'file:nexrender.svg',
 		group: ['transform'],
