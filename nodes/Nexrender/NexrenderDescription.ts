@@ -182,7 +182,7 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'Layer Name', value: 'nameid' },
 							{ name: 'LayerIndex', value: 'indexid' },
 						],
-						default: 'data',
+						default: 'nameid',
 						description: 'The Layer to be changed',
 					},
 					{
