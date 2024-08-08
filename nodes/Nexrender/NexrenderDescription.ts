@@ -162,7 +162,7 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'HTTPS', value: 'https' },
 						],
 						default: 'file',
-						description: 'Provider of the asset. Auto-determined from the source URL',
+						description: 'Provider of the asset. Auto-determined from the source URL.',
 					},
 					{
 						displayName: 'Layer Name',
@@ -178,7 +178,7 @@ export const assetsTab: INodeProperties[] = [
 						type: 'number',
 						default: null,
 						placeholder: '1',
-						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName',
+						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName.',
 					},
 					{
 						displayName: 'Property',
@@ -239,7 +239,7 @@ export const assetsTab: INodeProperties[] = [
 							},
 						},
 						default: false,
-						description: 'Whether to cache the file. Takes precedence over "Large File?"',
+						description: 'Whether to cache the file. Takes precedence over "Large File?".',
 					},
 					{
 						displayName: 'Cache Path',
@@ -288,10 +288,10 @@ export const actionsTab: INodeProperties[] = [
 		name: 'actions',
 		type: 'options',
 		options: [
-			{ name: 'Pre-download', value: 'predownload' },
-			{ name: 'Post-download', value: 'postdownload' },
-			{ name: 'Pre-render', value: 'prerender' },
-			{ name: 'Post-render', value: 'postrender' },
+			{ name: 'Pre-Download', value: 'predownload' },
+			{ name: 'Post-Download', value: 'postdownload' },
+			{ name: 'Pre-Render', value: 'prerender' },
+			{ name: 'Post-Render', value: 'postrender' },
 		],
 		default: 'predownload',
 		description: 'Select a Render Action type to configure',
