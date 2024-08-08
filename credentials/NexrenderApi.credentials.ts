@@ -25,13 +25,15 @@ export class NexrenderApi implements ICredentialType {
 			name: 'domain',
 			type: 'string',
 			default: 'http://localhost:3000',
+			required: true,
 			description: 'The Nexrender server hostname/domain/IP address',
 		},
 		{
 			displayName: 'Endpoint',
 			name: 'endpoint',
 			type: 'string',
-			default: '/api/v1/',
+			default: '/api/v1',
+			required: true,
 			description: 'The Nexrender API endpoint',
 		},
 		{
@@ -236,7 +238,7 @@ export class NexrenderApi implements ICredentialType {
 	test: ICredentialTestRequest = {
 		request: {
 			baseURL: '={{$credentials.domain}}',
-			url: '={{$credentials.endpoint}}jobs/',
+			url: '={{$credentials.endpoint}}/health',
 		},
 	};
 }

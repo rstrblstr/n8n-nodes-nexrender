@@ -149,9 +149,6 @@ export const assetsTab: INodeProperties[] = [
 						name: 'src',
 						type: 'string',
 						default: '',
-						displayOptions: {
-							show: { type: ['audio', 'image', 'video', 'static'] },
-						},
 						placeholder: 'file:///img.jpg http://img.jpg gs://image/img.jpg data:image/png;base64,iVBORw0KGgoAAAA...',
 						description: 'Source URI of the asset (file, ftp, http, base64, gs, s3, etc...)',
 					},
@@ -169,9 +166,6 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'HTTPS', value: 'https' },
 						],
 						default: 'file',
-						displayOptions: {
-							show: { type: ['audio', 'image', 'video', 'static'] },
-						},
 						description: 'Provider of the asset',
 					},
 					{
@@ -200,10 +194,10 @@ export const assetsTab: INodeProperties[] = [
 						displayName: 'Layer Index',
 						name: 'layerIndex',
 						type: 'number',
-						default: null,
 						displayOptions: {
 							show: { layerid: ['indexid'] },
 						},
+						default: null,
 						placeholder: '1',
 						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName.',
 					},
