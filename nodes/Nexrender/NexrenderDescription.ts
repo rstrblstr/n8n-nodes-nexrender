@@ -78,12 +78,60 @@ export const mainTab: INodeProperties[] = [
 				displayName: 'Output',
 				values: [
 					{
-						displayName: 'Render Output Location',
+						displayName: 'Workfolder Render Output Path',
 						name: 'outputLocation',
 						type: 'string',
 						default: '',
 						placeholder: '/folder/myrender.mov',
-						description: 'The output location for your rendered file',
+						description: 'The workfolder output location for your rendered temp file',
+					},
+					{
+						displayName: 'Keep Renders After Finish',
+						name: 'keepRender',
+						type: 'boolean',
+						default: true,
+						description: 'Whether to keep final renders after finish',
+					},
+					{
+						displayName: 'Use Job UID As Final Render Filename',
+						name: 'useJobId',
+						type: 'boolean',
+						displayOptions: {
+							show: {
+								operation: ['create', 'update'],
+								keepRender: [true],
+							},
+						},
+						default: true,
+						description: 'Whether to keep the final render (optional if you want to immediately process/upload the Output Render in other ways)',
+					},
+					{
+						displayName: 'Copy Final Render To',
+						name: 'copyLocation',
+						type: 'string',
+						default: '/render/',
+						displayOptions: {
+							show: {
+								useJobId: [true],
+								keepRender: [true],
+							},
+						},
+						placeholder: '/full/path/to/folder/',
+						description: 'The permanent output folder path to copy your render to',
+					},
+					{
+						displayName: 'Copy Final Render To',
+						name: 'copyLocation',
+						type: 'string',
+						default: '/render/finalrender.mov',
+						displayOptions: {
+							show: {
+								useJobId: [false],
+								keepRender: [true],
+							},
+						},
+						placeholder: '/full/path/to/finalrender.mov',
+						description: 'The permanent output file path to copy your render to',
 					},
 					{
 						displayName: 'Output Module',
@@ -105,6 +153,34 @@ export const mainTab: INodeProperties[] = [
 						type: 'string',
 						default: 'Best Settings',
 						description: 'AE Render Settings for the job',
+					},
+					{
+						displayName: 'Starting Frame Number',
+						name: 'frameStart',
+						type: 'number',
+						default: '0',
+						description: 'Frame number to start rendering on',
+					},
+					{
+						displayName: 'Ending Frame Number',
+						name: 'frameEnd',
+						type: 'number',
+						default: '',
+						description: 'Frame number to end rendering on',
+					},
+					{
+						displayName: 'Render Priority',
+						name: 'priority',
+						type: 'number',
+						default: '5',
+						description: 'Job render priority (lower number is higher priority)',
+					},
+					{
+						displayName: 'Job Tags',
+						name: 'tags',
+						type: 'string',
+						default: '',
+						description: 'Job categorization tags',
 					},
 				],
 			},
@@ -149,6 +225,9 @@ export const assetsTab: INodeProperties[] = [
 						name: 'src',
 						type: 'string',
 						default: '',
+						displayOptions: {
+							show: { type: ['audio', 'image', 'static', 'video'] },
+						},
 						placeholder: 'file:///img.jpg http://img.jpg gs://image/img.jpg data:image/png;base64,iVBORw0KGgoAAAA...',
 						description: 'Source URI of the asset (file, ftp, http, base64, gs, s3, etc...)',
 					},
@@ -165,6 +244,9 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'HTTP', value: 'http' },
 							{ name: 'HTTPS', value: 'https' },
 						],
+						displayOptions: {
+							show: { type: ['audio', 'image', 'static', 'video'] },
+						},
 						default: 'file',
 						description: 'Provider of the asset',
 					},
@@ -256,11 +338,12 @@ export const assetsTab: INodeProperties[] = [
 						type: 'boolean',
 						displayOptions: {
 							show: {
-								type: ['image', 'audio', 'video'],
+								type: ['image', 'audio', 'video', 'static'],
+								useOriginal: [false],
 							},
 						},
 						default: false,
-						description: 'Whether to cache the file. Takes precedence over "Large File?".',
+						description: 'Whether to cache the file',
 					},
 					{
 						displayName: 'Cache Path',
@@ -342,11 +425,114 @@ export const actionsTab: INodeProperties[] = [
 						name: 'actionJson',
 						type: 'string',
 						typeOptions: {
-							rows: 10,
+							rows: 5,
 						},
 						default: '[]',
 						placeholder: '[{"Actions": "go here"}]',
 						description: 'Action details (JSON format)',
+						displayOptions: {
+							show: {
+								actionType: ['predownload', 'postdownload', 'prerender'],
+							},
+						},
+					},
+					{
+						displayName: 'Action JSON',
+						name: 'actionJson',
+						type: 'string',
+						typeOptions: {
+							rows: 10,
+						},
+						default: `[
+							{
+								"module": "@nexrender/action-copy",
+								"output": "{{ $parameter['copyLocation'] }}",
+								"useJobId": "{{ $parameter['useJobId'] }}"
+							},
+							{
+								"module": "@nexrender/action-encode",
+								"preset": "mp4",
+								"output": "encoded.mp4"
+							},
+							{
+								"module": "@nexrender/action-copy",
+								"input": "encoded.mp4",
+								"output": "d:/mydocuments/results/myresult.mp4"
+							},
+							{
+								"module": "@nexrender/nexrender-action-webhook",
+								"url": "http://example.com/webhook",
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json",
+									"WebhookSecret": "{{ $credentials.webhooktoken }}"
+								},
+								"json": {
+									"uid": "{job.uid}",
+									"state": "{job.state}",
+									"type": "{job.type}",
+									"tags": "{job.tags}",
+									"renderProgress": "{job.renderProgress}",
+									"createdAt": "{job.createdAt}",
+									"updatedAt": "{job.updatedAt}",
+									"startedAt": "{job.startedAt}",
+									"jobCreator": "{job.jobCreator}",
+									"jobExecutor": "{job.jobExecutor}"
+								}
+							}
+						]`,
+						placeholder: '[{"Actions": "go here"}]',
+						description: 'Action details (JSON format)',
+						displayOptions: {
+							show: {
+								actionType: ['postrender'],
+								keepRender: [true],
+							},
+						},
+					},
+					{
+						displayName: 'Action JSON',
+						name: 'actionJson',
+						type: 'string',
+						typeOptions: {
+							rows: 10,
+						},
+						default: `[
+							{
+								"module": "@nexrender/action-encode",
+								"preset": "mp4",
+								"output": "encoded.mp4"
+							},
+							{
+								"module": "@nexrender/nexrender-action-webhook",
+								"url": "http://example.com/webhook",
+								"method": "POST",
+								"headers": {
+									"Content-Type": "application/json",
+									"WebhookSecret": "{{ $credentials.webhooktoken }}"
+								},
+								"json": {
+									"uid": "{job.uid}",
+									"state": "{job.state}",
+									"type": "{job.type}",
+									"tags": "{job.tags}",
+									"renderProgress": "{job.renderProgress}",
+									"createdAt": "{job.createdAt}",
+									"updatedAt": "{job.updatedAt}",
+									"startedAt": "{job.startedAt}",
+									"jobCreator": "{job.jobCreator}",
+									"jobExecutor": "{job.jobExecutor}"
+								}
+							}
+						]`,
+						placeholder: '[{"Actions": "go here"}]',
+						description: 'Action details (JSON format)',
+						displayOptions: {
+							show: {
+								actionType: ['postrender'],
+								keepRender: [false],
+							},
+						},
 					},
 				],
 			},
