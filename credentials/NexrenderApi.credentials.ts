@@ -227,8 +227,9 @@ export class NexrenderApi implements ICredentialType {
 			displayName: 'Post-Render Webhook Token',
 			name: 'webhooktoken',
 			type: 'string',
+			typeOptions: { password: true },
 			default: 'mywebhooktoken',
-			description: 'Your secret webhook authentication token',
+			description: 'Your secret webhook authentication token (default: mywebhooktoken)',
 		},
 	];
 
