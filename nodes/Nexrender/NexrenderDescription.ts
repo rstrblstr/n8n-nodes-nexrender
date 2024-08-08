@@ -43,7 +43,7 @@ export const mainTab: INodeProperties[] = [
 		},
 		default: '',
 		required: true,
-		description: 'UID of the job to retrieve, update, or delete.',
+		description: 'UID of the job to retrieve, update, or delete',
 	},
 	{
 		displayName: 'AEP Project Source',
@@ -52,7 +52,7 @@ export const mainTab: INodeProperties[] = [
 		default: '',
 		placeholder: 'file:///project.aep',
 		required: true,
-		description: 'Location of the Project.aep.',
+		description: 'Location of the Project.aep',
 	},
 	{
 		displayName: 'Composition',
@@ -61,7 +61,7 @@ export const mainTab: INodeProperties[] = [
 		default: '',
 		required: true,
 		placeholder: 'MainComp->PreComp->PrePreComp',
-		description: 'Composition of the template being modified.',
+		description: 'Composition of the template being modified',
 	},
 	{
 		displayName: 'Render Output Location',
@@ -69,14 +69,14 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: '/folder/myrender.mov',
-		description: 'The output location for your rendered file.',
+		description: 'The output location for your rendered file',
 	},
 	{
 		displayName: 'Continue On Missing',
 		name: 'continueOnMissing',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to continue on missing assets.',
+		description: 'Whether to continue on missing assets',
 	},
 	{
 		displayName: 'Output Module',
@@ -84,7 +84,7 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: 'Lossless with Alpha',
-		description: 'AE Output Module for the job.',
+		description: 'AE Output Module for the job',
 	},
 	{
 		displayName: 'Output Extension',
@@ -92,14 +92,14 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: 'mov',
-		description: 'Output file extension for the job.',
+		description: 'Output file extension for the job',
 	},
 	{
 		displayName: 'Render Settings',
 		name: 'renderSettings',
 		type: 'string',
 		default: 'Best Settings',
-		description: 'AE Render Settings for the job.',
+		description: 'AE Render Settings for the job',
 	},
 	{
 		displayName: 'Output Settings',
@@ -107,7 +107,7 @@ export const mainTab: INodeProperties[] = [
 		type: 'string',
 		default: '',
 		placeholder: 'Comp Name',
-		description: 'AE Output Settings for the job.',
+		description: 'AE Output Settings for the job',
 	},
 ];
 
@@ -262,7 +262,7 @@ export const assetsTab: INodeProperties[] = [
 		name: 'assetsOverride',
 		type: 'boolean',
 		default: false,
-		description: 'Whether to enable manual JSON for putting assets in the job request (not recommended).',
+		description: 'Whether to enable manual JSON for putting assets in the job request (not recommended)',
 	},
 	{
 		displayName: 'Manual Assets JSON',
@@ -278,7 +278,7 @@ export const assetsTab: INodeProperties[] = [
 		},
 		default: '',
 		required: true,
-		description: 'Assets for the job (JSON format).',
+		description: 'Assets for the job (JSON format)',
 	},
 ];
 
@@ -294,7 +294,7 @@ export const actionsTab: INodeProperties[] = [
 			{ name: 'Post-render', value: 'postrender' },
 		],
 		default: 'predownload',
-		description: 'Select a Render Action type to configure.',
+		description: 'Select a Render Action type to configure',
 	},
 	{
 		displayName: 'Pre-Download Actions',
@@ -310,7 +310,7 @@ export const actionsTab: INodeProperties[] = [
 		},
 		default: '[]',
 		placeholder: '[{"Actions": "go here"}]',
-		description: 'Pre-download actions (JSON format).',
+		description: 'Pre-download actions (JSON format)',
 	},
 	{
 		displayName: 'Post-Download Actions',
@@ -326,7 +326,7 @@ export const actionsTab: INodeProperties[] = [
 		},
 		default: '[]',
 		placeholder: '[{"Actions": "go here"}]',
-		description: 'Post-Download actions (JSON format).',
+		description: 'Post-Download actions (JSON format)',
 	},
 	{
 		displayName: 'Pre-Render Actions',
@@ -342,7 +342,7 @@ export const actionsTab: INodeProperties[] = [
 		},
 		default: '[]',
 		placeholder: '[{"Actions": "go here"}]',
-		description: 'Pre-Render actions (JSON format).',
+		description: 'Pre-Render actions (JSON format)',
 	},
 	{
 		displayName: 'Post-Render Actions',
@@ -370,7 +370,7 @@ export const actionsTab: INodeProperties[] = [
                 }
             }
         ]`,
-		description: 'Post-Render actions (JSON format).',
+		description: 'Post-Render actions (JSON format)',
 	},
 ];
 
