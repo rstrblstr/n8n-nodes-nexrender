@@ -3,7 +3,7 @@
 		"strict": true,
 		"module": "commonjs",
 		"moduleResolution": "node",
-		"target": "es2019",
+		"target": ["es2019"],
 		"lib": ["es2019", "es2020", "es2022.error"],
 		"removeComments": true,
 		"useUnknownInCatchVariables": false,
@@ -19,12 +19,16 @@
 		"declaration": true,
 		"sourceMap": true,
 		"skipLibCheck": true,
-		"outDir": "./dist/",
+		"outDir": "./dist"
 	},
 	"include": [
 		"credentials/**/*",
 		"nodes/**/*",
 		"nodes/**/*.json",
-		"package.json",
+    "src/**/*.ts",
+		"package.json"
 	],
 }
+
+
+
