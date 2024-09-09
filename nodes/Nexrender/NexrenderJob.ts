@@ -237,10 +237,10 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'Data', value: 'data' },
 							{ name: 'Image', value: 'image' },
 							{ name: 'Static', value: 'static' },
-							{ name: 'Video', value: 'video' },
+							{ name: 'Video', value: 'video' }
 						],
 						default: 'data',
-						description: 'Type of the asset',
+						description: 'Type of the asset'
 					},
 					{
 						displayName: 'Source',
@@ -248,10 +248,10 @@ export const assetsTab: INodeProperties[] = [
 						type: 'string',
 						default: '',
 						displayOptions: {
-							show: { type: ['audio', 'image', 'static', 'video'] },
+							show: { type: ['audio', 'image', 'static', 'video'] }
 						},
 						placeholder: 'file:///img.jpg http://img.jpg gs://image/img.jpg data:image/png;base64,iVBORw0KGgoAAAA...',
-						description: 'Source URI of the asset (file, ftp, http, base64, gs, s3, etc...)',
+						description: 'Source URI of the asset (file, ftp, http, base64, gs, s3, etc...)'
 					},
 					{
 						displayName: 'Provider',
@@ -264,13 +264,13 @@ export const assetsTab: INodeProperties[] = [
 							{ name: 'FTP', value: 'ftp' },
 							{ name: 'Google Cloud', value: 'gs' },
 							{ name: 'HTTP', value: 'http' },
-							{ name: 'HTTPS', value: 'https' },
+							{ name: 'HTTPS', value: 'https' }
 						],
 						displayOptions: {
-							show: { type: ['audio', 'image', 'static', 'video'] },
+							show: { type: ['audio', 'image', 'static', 'video'] }
 						},
 						default: 'file',
-						description: 'Provider of the asset',
+						description: 'Provider of the asset'
 					},
 					{
 						displayName: 'Layer ID',
@@ -278,7 +278,7 @@ export const assetsTab: INodeProperties[] = [
 						type: 'options',
 						options: [
 							{ name: 'Layer Name', value: 'nameid' },
-							{ name: 'LayerIndex', value: 'indexid' },
+							{ name: 'LayerIndex', value: 'indexid' }
 						],
 						default: 'nameid',
 						description: 'The Layer to be changed',
@@ -288,22 +288,22 @@ export const assetsTab: INodeProperties[] = [
 						name: 'layerName',
 						type: 'string',
 						displayOptions: {
-							show: { layerid: ['nameid'] },
+							show: { layerid: ['nameid'] }
 						},
 						default: '',
 						placeholder: 'My_layerName',
-						description: 'Specify the layer name',
+						description: 'Specify the layer name'
 					},
 					{
 						displayName: 'Layer Index',
 						name: 'layerIndex',
 						type: 'number',
 						displayOptions: {
-							show: { layerid: ['indexid'] },
+							show: { layerid: ['indexid'] }
 						},
 						default: undefined,
 						placeholder: '1',
-						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName.',
+						description: 'Specify the layer index. If provided, layerIndex takes precedence over layerName.'
 					},
 					{
 						displayName: 'Property',
@@ -311,12 +311,12 @@ export const assetsTab: INodeProperties[] = [
 						type: 'string',
 						displayOptions: {
 							show: {
-								type: ['data'],
-							},
+								type: ['data']
+							}
 						},
 						default: '',
 						placeholder: 'Source Text, Position, Scale, Source Text.font, Effects.name.Color',
-						description: 'Property of the data asset',
+						description: 'Property of the data asset'
 					},
 					{
 						displayName: 'Value',
@@ -324,11 +324,11 @@ export const assetsTab: INodeProperties[] = [
 						type: 'string',
 						displayOptions: {
 							show: {
-								type: ['data'],
-							},
+								type: ['data']
+							}
 						},
 						default: '',
-						description: 'Value of the data asset',
+						description: 'Value of the data asset'
 					},
 					{
 						displayName: 'Expression',
@@ -336,8 +336,8 @@ export const assetsTab: INodeProperties[] = [
 						type: 'string',
 						displayOptions: {
 							show: {
-								type: ['data'],
-							},
+								type: ['data']
+							}
 						},
 						default: '',
 						description: 'Expression for the data asset',
@@ -348,11 +348,11 @@ export const assetsTab: INodeProperties[] = [
 						type: 'boolean',
 						displayOptions: {
 							show: {
-								type: ['image', 'audio', 'video'],
-							},
+								type: ['image', 'audio', 'video']
+							}
 						},
 						default: false,
-						description: 'Whether to forgo copying the media to the work folder',
+						description: 'Whether to forgo copying the media to the work folder'
 					},
 					{
 						displayName: 'Cache File?',
@@ -361,11 +361,11 @@ export const assetsTab: INodeProperties[] = [
 						displayOptions: {
 							show: {
 								type: ['image', 'audio', 'video', 'static'],
-								useOriginal: [false],
-							},
+								useOriginal: [false]
+							}
 						},
 						default: false,
-						description: 'Whether to cache the file',
+						description: 'Whether to cache the file'
 					},
 					{
 						displayName: 'Cache Path',
@@ -373,22 +373,22 @@ export const assetsTab: INodeProperties[] = [
 						type: 'string',
 						displayOptions: {
 							show: {
-								useCache: [true],
-							},
+								useCache: [true]
+							}
 						},
 						default: '/${workpath}/my-nexrender-cache',
-						description: 'Cache path for the asset',
-					},
-				],
-			},
-		],
+						description: 'Cache path for the asset'
+					}
+				]
+			}
+		]
 	},
 	{
 		displayName: 'Insert Manual Assets',
 		name: 'assetsOverride',
 		type: 'boolean',
 		displayOptions: {
-			show: { operation: ['create', 'update'] },
+			show: { operation: ['create', 'update'] }
 		},
 		default: false,
 		description: 'Whether to enable manual JSON for putting assets in the job request (not recommended)',
@@ -398,16 +398,16 @@ export const assetsTab: INodeProperties[] = [
 		name: 'assetsOverrideText',
 		type: 'string',
 		typeOptions: {
-			rows: 25,
+			rows: 25
 		},
 		displayOptions: {
 			show: {
-				assetsOverride: [true],
+				assetsOverride: [true]
 			},
 		},
 		default: '',
 		required: true,
-		description: 'Assets for the job (JSON format)',
+		description: 'Assets for the job (JSON format)'
 	},
 ];
 
@@ -419,10 +419,10 @@ export const actionsTab: INodeProperties[] = [
 		placeholder: 'Add Action',
 		default: {},
 		displayOptions: {
-			show: { operation: ['create', 'update'] },
+			show: { operation: ['create', 'update'] }
 		},
 		typeOptions: {
-			multipleValues: true,
+			multipleValues: true
 		},
 		options: [
 			{
@@ -437,7 +437,7 @@ export const actionsTab: INodeProperties[] = [
 							{ name: 'Pre-Download', value: 'predownload' },
 							{ name: 'Post-Download', value: 'postdownload' },
 							{ name: 'Pre-Render', value: 'prerender' },
-							{ name: 'Post-Render', value: 'postrender' },
+							{ name: 'Post-Render', value: 'postrender' }
 						],
 						default: 'predownload',
 						description: 'Select a Render Action type to configure',
@@ -454,16 +454,16 @@ export const actionsTab: INodeProperties[] = [
 						description: 'Action details (JSON format)',
 						displayOptions: {
 							show: {
-								actionType: ['predownload', 'postdownload', 'prerender'],
-							},
-						},
+								actionType: ['predownload', 'postdownload', 'prerender']
+							}
+						}
 					},
 					{
 						displayName: 'Action JSON',
 						name: 'actionJson',
 						type: 'string',
 						typeOptions: {
-							rows: 10,
+							rows: 10
 						},
 						default: `
 [
